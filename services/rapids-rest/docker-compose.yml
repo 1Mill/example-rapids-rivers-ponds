@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  rest:
+    image: confluentinc/cp-kafka-rest:5.4.2
+    environment:
+      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://rapids:9092
+      KAFKA_REST_HOST_NAME: rest
+    networks:
+      - services-network
+    ports:
+      - 8082:8082
+
+networks:
+  services-network:
+    name: services-network
