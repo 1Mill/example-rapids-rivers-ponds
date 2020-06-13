@@ -5,7 +5,7 @@ services:
     image: confluentinc/cp-kafka-rest:5.4.2
     environment:
       KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://rapids:9092
-      KAFKA_REST_HOST_NAME: rest
+      KAFKA_REST_HOST_NAME: localhost
     networks:
       - services-network
     ports:
