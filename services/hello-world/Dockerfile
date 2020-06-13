@@ -10,4 +10,4 @@ RUN npm install
 
 COPY . .
 
-CMD [ "echo", "Hello world!" ]
+CMD [ "npm", "run", "start" ]
