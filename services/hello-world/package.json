@@ -8,5 +8,8 @@
   },
   "author": "",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "@1mill/waterway": "^0.2.3"
+  }
 }
