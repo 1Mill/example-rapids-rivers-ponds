@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  rapids:
+    image: confluentinc/cp-kafka:5.4.2
+    depends_on:
+      - zookeeper
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://:${INTERNAL_PORT},EXTERNAL://:${PORT}
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LISTENERS: INTERNAL://:${INTERNAL_PORT},EXTERNAL://:${PORT}
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+    networks:
+      - services-network
+    ports:
+      - ${PORT}:${PORT}
+
+  zookeeper:
+    image: zookeeper:3.5
+    networks:
+      - services-network
+
+networks:
+  services-network:
+    name: services-network
