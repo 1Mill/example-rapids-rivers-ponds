@@ -14,10 +14,11 @@ export const subscribe = async () => {
 			consumer: CONSUMER,
 			proxyUrl: RAPIDS_PROXY_URL,
 		});
-		console.log(consumerUrl)
-		console.log(instanceId);
+
 		// 2. Create subscription through constumer instance
+
 		// 3. Fetch records collected by consumer instance
+
 		// 4. Delete consumer instance
 		await deleteConsumerInstance({
 			consumer: CONSUMER,
