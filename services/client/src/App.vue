@@ -2,8 +2,8 @@
 export default {
 	methods: {
 		produce({ topic }) {
-			const url = `${process.env.VUE_APP_RAPIDS_PROXY_URL}/topics/${topic}`;
-			fetch(url, {
+			const { href } = new URL(`/topics/${topic}`, process.env.VUE_APP_RAPIDS_PROXY_URL);
+			fetch(href, {
 				body: JSON.stringify({
 					records: [
 						{ value: "testing" }
