@@ -20,7 +20,9 @@ services:
       - ${PORT}:${PORT}
 
   zookeeper:
-    image: zookeeper:3.5
+    image: confluentinc/cp-zookeeper:5.4.2
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
     networks:
       - services-network
 
