@@ -6,7 +6,7 @@ services:
     environment:
       NODE_ENV: development
       PORT: 8080
-      RAPIDS_PROXY_URL: http://localhost:8082/
+      VUE_APP_RAPIDS_PROXY_URL: http://localhost:8082/
     networks:
       - services-network
     ports:
