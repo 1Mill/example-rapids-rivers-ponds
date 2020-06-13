@@ -10,4 +10,6 @@ RUN npm install
 
 COPY . .
 
+ENV RAPIDS_URL=${RAPIDS_URL}
+
 CMD [ "npm", "run", "start" ]
