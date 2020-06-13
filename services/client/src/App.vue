@@ -1,9 +1,11 @@
 <script>
 import { produce } from './utilities/rapids/produce';
+import { subscribe } from './utilities/rapids/subscribe';
 
 export default {
 	methods: {
 		produce,
+		subscribe,
 	},
 };
 </script>
@@ -13,6 +15,9 @@ export default {
 		<h1>Hello world!</h1>
 		<button @click='produce({ topic: "hello-world" })'>
 			Create "hello-world" topic
+		</button>
+		<button @click='subscribe'>
+			Subscribe to "text-messages" topic
 		</button>
 	</main>
 </template>
