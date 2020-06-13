@@ -4,8 +4,11 @@ services:
   rest:
     image: confluentinc/cp-kafka-rest:5.4.2
     environment:
-      KAFKA_REST_BOOTSTRAP_SERVERS: PLAINTEXT://rapids:9092
-      KAFKA_REST_HOST_NAME: localhost
+      - KAFKA_REST_ACCESS_CONTROL_ALLOW_HEADERES=origin,content-type,accept
+      - KAFKA_REST_ACCESS_CONTROL_ALLOW_METHODS=GET,POST,PUT,DELETE,OPTION
+      - KAFKA_REST_ACCESS_CONTROL_ALLOW_ORIGIN=*
+      - KAFKA_REST_BOOTSTRAP_SERVERS=PLAINTEXT://rapids:9092
+      - KAFKA_REST_HOST_NAME=localhost
     networks:
       - services-network
     ports:
