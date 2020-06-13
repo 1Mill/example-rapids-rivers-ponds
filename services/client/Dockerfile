@@ -10,4 +10,10 @@ RUN npm install
 
 COPY . .
 
+ENV \
+	HOST=0.0.0.0 \
+	PORT=8080
+
+EXPOSE ${PORT}
+
 CMD [ "npm", "run", "start" ]
