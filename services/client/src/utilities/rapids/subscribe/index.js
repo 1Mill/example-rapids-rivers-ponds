@@ -1,6 +1,6 @@
 import { createConsumerInstance } from './createConsumerInstance';
 import { deleteConsumerInstance } from './deleteConsumerInstance';
-// import { subscribeToTopic } from './subscribeToTopic';
+import { subscribeToTopic } from './subscribeToTopic';
 
 const CONSUMER = 'my-json-consumer';
 const INSTANCE_ID = 'my-instance-id';
@@ -16,6 +16,12 @@ export const subscribe = async () => {
 		});
 
 		// 2. Create subscription through constumer instance
+		await subscribeToTopic({
+			consumer: CONSUMER,
+			instanceId: INSTANCE_ID,
+			proxyUrl: RAPIDS_PROXY_URL,
+			topic: 'text-messages',
+		});
 
 		// 3. Fetch records collected by consumer instance
 
