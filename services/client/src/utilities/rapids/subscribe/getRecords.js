@@ -6,7 +6,7 @@ export const getRecords = async ({ consumer, instanceId, proxyUrl }) => {
 	const response = await fetch(href, {
 		headers: { 'Accept': 'application/vnd.kafka.json.v2+json' },
 		method: 'GET',
-	})
+	});
 	const data = response.json();
 	return data;
 };

@@ -21,16 +21,23 @@ export const subscribe = async () => {
 			consumer: CONSUMER,
 			instanceId: INSTANCE_ID,
 			proxyUrl: RAPIDS_PROXY_URL,
-			topic: 'text-messages',
+			topic: 'hello-world',
 		});
 
 		// 3. Fetch records collected by consumer instance
+		// TODO: figure out why data only shows on on second requests
 		const data = await getRecords({
 			consumer: CONSUMER,
 			instanceId: INSTANCE_ID,
 			proxyUrl: RAPIDS_PROXY_URL,
 		});
 		console.log(data);
+		const data2 = await getRecords({
+			consumer: CONSUMER,
+			instanceId: INSTANCE_ID,
+			proxyUrl: RAPIDS_PROXY_URL
+		});
+		console.log(data2);
 
 		// 4. Delete consumer instance
 		await deleteConsumerInstance({
