@@ -9,7 +9,8 @@ services:
     environment:
       NODE_ENV: development
       PORT: 8080
-      VUE_APP_RAPIDS_PROXY_URL: http://localhost:8082/
+      VUE_APP_PRODUCER_URL: http://localhost:8081/
+      VUE_APP_SUBSCRIBER_URL: http://localhost:8083/
     networks:
       - services-network
     ports:
