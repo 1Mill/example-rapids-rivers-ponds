@@ -18,8 +18,8 @@ export default {
 <template>
 	<main>
 		<input type='text' v-model='payload'/>
-		<button @click='produce({ topic: "hello-world", payloads: [ payload ] })'>
-			Create single "hello-world" topic
+		<button @click='produce({ topic: "hello-world-2020-06-14", payloads: [ payload ] })'>
+			Create single "hello-world-2020-06-14" topic
 		</button>
 		<button @click='subscribe'>
 			Subscribe to "text-messages" topic

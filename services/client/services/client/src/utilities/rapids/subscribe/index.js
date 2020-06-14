@@ -21,7 +21,7 @@ export const subscribe = async () => {
 			consumer: CONSUMER,
 			instanceId: INSTANCE_ID,
 			proxyUrl: RAPIDS_PROXY_URL,
-			topic: 'hello-world',
+			topic: 'hello-world-2020-06-14',
 		});
 
 		// 3. Fetch records collected by consumer instance
