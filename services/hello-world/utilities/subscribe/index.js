@@ -14,11 +14,9 @@ const subscribe = async ({ topic }) => {
 		await subscribe({ topic, fromBeginning: true });
 		await run({
 			eachMessage: async ({ topic, partition, message }) => {
-				console.log('Message received ---');
-				console.log(topic);
-				console.log(partition);
-				console.log(message);
-				console.log('---');
+				const value = JSON.parse(message.value);
+				const data = JSON.parse(value.data);
+				console.log(data);
 			},
 		});
 	}
