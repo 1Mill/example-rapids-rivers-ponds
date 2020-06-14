@@ -15,10 +15,8 @@ const subscribe = async ({ handler, topic }) => {
 		await connect();
 		await subscribe({ topic, fromBeginning: true });
 		await run({
-			eachMessage: async ({ topic, partition, message }) => {
-				const value = JSON.parse(message.value);
-				const data = JSON.parse(value.data);
-				handler({ data });
+			eachMessage: async (cloudevent) => {
+				handler({ cloudevent });
 			},
 		});
 	};

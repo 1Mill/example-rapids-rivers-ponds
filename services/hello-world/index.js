@@ -1,8 +1,9 @@
+const { applicationData } = require('./utilities/cloudevents/applicationData')
 const { subscribe } = require('./utilities/subscribe');
 
 subscribe({
-	handler: ({ data }) => {
-		console.log(data);
+	handler: ({ cloudevent }) => {
+		console.log(applicationData({ cloudevent }));
 	},
 	topic: 'hello-world',
 });
