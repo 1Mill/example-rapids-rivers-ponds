@@ -14,6 +14,8 @@ const publish = async ({ id, payloads=[ '' ], topic }) => {
 			headers: { contentType: 'application/cloudevents+json;charset=UTF-8' },
 			// https://github.com/cloudevents/spec/blob/master/kafka-protocol-binding.md#334-example
 			value: JSON.stringify({
+				// TODO: Source (e.g. /my-product-page/123)
+				// TODO: Type (e.g. my-topic-2020-06-14)
 				data: JSON.stringify(payload),
 				datacontenttype: 'application/json',
 				id,
