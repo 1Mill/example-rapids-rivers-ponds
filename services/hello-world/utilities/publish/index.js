@@ -6,7 +6,7 @@ const KAFKA = new Kafka({
 	clientId: CLIENT_ID,
 });
 
-export const publish = async ({ id, payloads=[ '' ], topic }) => {
+const publish = async ({ id, payloads=[ '' ], topic }) => {
 	const { connect, disconnect, send } = KAFKA.producer();
 	await connect();
 	await send({
@@ -25,3 +25,5 @@ export const publish = async ({ id, payloads=[ '' ], topic }) => {
 	});
 	await disconnect();
 };
+
+module.exports = { publish };

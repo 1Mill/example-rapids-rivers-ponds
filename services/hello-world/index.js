@@ -1,3 +1,3 @@
-const { subscribe } = require("./utilities/subscribe");
+const { subscribe } = require('./utilities/subscribe');
 
-subscribe({ topic: "hello-world" });
+console.log(subscribe);

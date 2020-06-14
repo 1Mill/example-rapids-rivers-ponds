@@ -7,7 +7,7 @@ const KAFKA = new Kafka({
 	clientId: CLIENT_ID,
 });
 
-export const subscribe = async ({ topic }) => {
+const subscribe = async ({ topic }) => {
 	const { connect, disconnect, run, subscribe } = KAFKA.consumer({ groupId: CLIENT_ID });
 	await connect();
 	await subscribe({ topic, fromBeginning: true });
@@ -40,3 +40,5 @@ export const subscribe = async ({ topic }) => {
 		});
 	});
 };
+
+module.exports = { subscribe };
