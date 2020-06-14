@@ -18,11 +18,11 @@ export default {
 <template>
 	<main>
 		<input type='text' v-model='payload'/>
-		<button @click='produce({ topic: "hello-world-2020-06-14", payloads: [ payload ] })'>
-			Create single "hello-world-2020-06-14" topic
+		<button @click='produce({ type: "hello-world-2020-06-14", payloads: [ payload ] })'>
+			Create single "hello-world-2020-06-14" type (e.g. kafka-topic)
 		</button>
-		<button @click='subscribe'>
+		<!-- <button @click='subscribe'>
 			Subscribe to "text-messages" topic
-		</button>
+		</button> -->
 	</main>
 </template>

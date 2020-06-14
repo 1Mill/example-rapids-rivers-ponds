@@ -16,11 +16,11 @@ io.use(ioMiddlewareWildcard);
 io.on('connect', (socket) => {
 	socket.on('*', (packet) => {
 		try {
-			const [ { topic, payloads } ] = packet.data;
+			const [ { type, payloads } ] = packet.data;
 			publish({
 				id: socket.id,
 				payloads,
-				topic,
+				type,
 			});
 		} catch (err) {
 			console.error(err);

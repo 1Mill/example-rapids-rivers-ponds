@@ -20,10 +20,10 @@ const publish = async ({ id, payloads=[ '' ], topic }) => {
 				id,
 				specversion: '1.0',
 				time: new Date().toISOString(),
-				type: topic,
+				type,
 			}),
 		})),
-		topic,
+		topic: type,
 	});
 	await disconnect();
 };
