@@ -13,7 +13,7 @@ const main = async() => {
 			onEvent: ({ event }) => {
 				const value = JSON.parse(event.message.value);
 				const data = JSON.parse(value.data);
-				console.log(data);
+				console.log('Cloud Event data: ', data);
 			},
 			topics: TOPICS,
 		})
