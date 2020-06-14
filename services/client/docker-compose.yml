@@ -19,10 +19,14 @@ services:
 
   producer:
     build: ./services/producer
+    depends_on:
+      - redis
     environment:
       NODE_ENV: development
       PORT: 8081
       RAPIDS_URL: rapids:9092
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     networks:
       - services-network
     ports:
@@ -30,12 +34,21 @@ services:
     volumes:
       - ./services/producer:/app
 
+  redis:
+    image: redis:5-alpine
+    networks:
+      - services-network
+
   subscriber:
     build: ./services/subscriber
+    depends_on:
+      - redis
     environment:
       NODE_ENV: development
       PORT: 8083
       RAPIDS_URL: rapids:9092
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     networks:
       - services-network
     ports:
