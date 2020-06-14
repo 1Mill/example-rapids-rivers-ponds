@@ -13,7 +13,7 @@ export default {
 <template>
 	<main>
 		<h1>Hello world!</h1>
-		<button @click='produce({ topic: "hello-world" })'>
+		<button @click='produce()'>
 			Create "hello-world" topic
 		</button>
 		<button @click='subscribe'>

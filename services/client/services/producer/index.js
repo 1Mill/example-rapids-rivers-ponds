@@ -1,6 +1,6 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const ioRedisAdapter = require('socket.io-redis');
-// const { publish } = require('./utilities/publish');
+const { publish } = require('./utilities/publish');
 
 const server = require('http').createServer();
 
@@ -16,8 +16,12 @@ io.use(ioMiddlewareWildcard);
 io.on('connect', (socket) => {
 	socket.on('*', (packet) => {
 		try {
-			const [ topic ] = packet.data;
-			console.log('Topic: ', topic);
+			const [ { topic, payloads } ] = packet.data;
+			publish({
+				id: socket.id,
+				payloads,
+				topic,
+			});
 		} catch (err) {
 			console.error(err);
 		}
