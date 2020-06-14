@@ -12,7 +12,9 @@ const main = async() => {
 		}).subscribe({
 			onEvent: ({ event }) => {
 				console.log('Hello world!');
-				// console.log(event);
+				const test = JSON.parse(event.message.value)
+				console.log(test);
+				console.log(JSON.parse(test.data));
 			},
 			topics: TOPICS,
 		})
