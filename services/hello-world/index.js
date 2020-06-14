@@ -3,7 +3,9 @@ const { subscribe } = require('./utilities/subscribe');
 
 subscribe({
 	handler: ({ cloudevent }) => {
-		console.log(applicationData({ cloudevent }));
+		const data = applicationData({ cloudevent });
+		if (data === '') { console.log('THIS THING IS EMPTY!') }
+		console.log(data);
 	},
 	topic: 'hello-world',
 });
