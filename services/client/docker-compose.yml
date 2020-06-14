@@ -4,7 +4,7 @@ services:
   app:
     build: ./services/client
     depends_on:
-      - sockets
+      - producer
     environment:
       NODE_ENV: development
       PORT: 8080
