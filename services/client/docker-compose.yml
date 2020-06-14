@@ -16,8 +16,8 @@ services:
     volumes:
       - ./services/client:/app
 
-  sockets:
-    build: ./services/sockets
+  producer:
+    build: ./services/producer
     environment:
       NODE_ENV: development
       PORT: 8081
@@ -26,7 +26,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./services/sockets:/app
+      - ./services/producer:/app
 
 networks:
   services-network:
