@@ -3,6 +3,8 @@ version: '3.8'
 services:
   app:
     build: ./services/client
+    depends_on:
+      - sockets
     environment:
       NODE_ENV: development
       PORT: 8080
@@ -13,6 +15,18 @@ services:
       - 8080:8080
     volumes:
       - ./services/client:/app
+
+  sockets:
+    build: ./services/sockets
+    environment:
+      NODE_ENV: development
+      PORT: 8081
+    networks:
+      - services-network
+    ports:
+      - 8081:8081
+    volumes:
+      - ./services/sockets:/app
 
 networks:
   services-network:
