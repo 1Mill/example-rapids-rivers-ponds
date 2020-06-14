@@ -13,8 +13,12 @@ const subscribe = async ({ topic }) => {
 		await connect();
 		await subscribe({ topic, fromBeginning: true });
 		await run({
-			eachMessage: async({ topic, partition, message }) => {
-				console.log('Message received');
+			eachMessage: async ({ topic, partition, message }) => {
+				console.log('Message received ---');
+				console.log(topic);
+				console.log(partition);
+				console.log(message);
+				console.log('---');
 			},
 		});
 	}
