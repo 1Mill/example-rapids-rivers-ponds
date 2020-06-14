@@ -7,8 +7,10 @@ const KAFKA = new Kafka({
 	clientId: CLIENT_ID,
 });
 
-const subscribe = async ({ topic }) => {
-	const { connect, disconnect, run, subscribe } = KAFKA.consumer({ groupId: CLIENT_ID });
+const subscribe = async ({ handler, topic }) => {
+	const { connect, disconnect, run, subscribe } = KAFKA.consumer({
+		groupId: CLIENT_ID,
+	});
 	const main = async () => {
 		await connect();
 		await subscribe({ topic, fromBeginning: true });
@@ -16,10 +18,10 @@ const subscribe = async ({ topic }) => {
 			eachMessage: async ({ topic, partition, message }) => {
 				const value = JSON.parse(message.value);
 				const data = JSON.parse(value.data);
-				console.log(data);
+				handler({ data });
 			},
 		});
-	}
+	};
 	main().catch((err) => console.error(err));
 
 	ERROR_TYPES.map((type) => {

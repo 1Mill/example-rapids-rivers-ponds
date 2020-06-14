@@ -1,3 +1,8 @@
 const { subscribe } = require('./utilities/subscribe');
 
-subscribe({ topic: 'hello-world' });
+subscribe({
+	handler: ({ data }) => {
+		console.log(data);
+	},
+	topic: "hello-world",
+});
