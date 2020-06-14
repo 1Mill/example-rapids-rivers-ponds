@@ -1,5 +1,5 @@
 <script>
-import { produce } from './utilities/rapids/produce';
+import { produce } from './utilities/produce';
 import { subscribe } from './utilities/rapids/subscribe';
 
 export default {
