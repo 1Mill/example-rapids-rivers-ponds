@@ -1,6 +1,3 @@
-const { produce } = require('./utilities/produce');
-const { subscribe } = require('./utilities/subscribe');
+const { subscribe } = require("./utilities/subscribe");
 
-// produce({
-
-// })
+subscribe({ topic: "hello-world" });
