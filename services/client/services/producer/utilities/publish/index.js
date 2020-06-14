@@ -1,6 +1,6 @@
-const { Kafka } = require("kafkajs");
+const { Kafka } = require('kafkajs');
 
-const CLIENT_ID = "client-producer-service";
+const CLIENT_ID = 'client-producer-service';
 const KAFKA = new Kafka({
 	brokers: [process.env.RAPIDS_URL],
 	clientId: CLIENT_ID,
