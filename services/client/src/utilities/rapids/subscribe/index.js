@@ -1,17 +1,17 @@
 import { createConsumerInstance } from './createConsumerInstance';
 import { deleteConsumerInstance } from './deleteConsumerInstance';
+// import { subscribeToTopic } from './subscribeToTopic';
 
 const CONSUMER = 'my-json-consumer';
+const INSTANCE_ID = 'my-instance-id';
 const RAPIDS_PROXY_URL = process.env.VUE_APP_RAPIDS_PROXY_URL;
 
 export const subscribe = async () => {
 	try {
 		// 1. Create consumer instance
-		const {
-			base_uri: consumerUrl,
-			instance_id: instanceId,
-		} = await createConsumerInstance({
+		await createConsumerInstance({
 			consumer: CONSUMER,
+			instanceId: INSTANCE_ID,
 			proxyUrl: RAPIDS_PROXY_URL,
 		});
 
@@ -22,8 +22,8 @@ export const subscribe = async () => {
 		// 4. Delete consumer instance
 		await deleteConsumerInstance({
 			consumer: CONSUMER,
-			instance: instanceId,
-			proxyUrl: RAPIDS_PROXY_URL,
+			instance: INSTANCE_ID,
+			proxyUrl: RAPIDS_PROXY_URL
 		});
 	} catch (err) {
 		console.error(err);
