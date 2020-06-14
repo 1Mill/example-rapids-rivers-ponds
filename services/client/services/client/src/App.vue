@@ -17,16 +17,6 @@ export default {
 
 <template>
 	<main>
-		<!-- <h1>Hello world!</h1>
-		<button @click='produce({
-			topics: [
-				{ topic: "hello-world" },
-				{ topic: "hello-world" },
-				{ topic: "hello-world" },
-			]
-		})'>
-			Create "hello-world" topics
-		</button> -->
 		<input type='text' v-model='payload'/>
 		<button @click='produce({ topic: "hello-world", payloads: [ payload ] })'>
 			Create single "hello-world" topic
