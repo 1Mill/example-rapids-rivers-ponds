@@ -9,14 +9,16 @@ const KAFKA = new Kafka({
 
 const subscribe = async ({ topic }) => {
 	const { connect, disconnect, run, subscribe } = KAFKA.consumer({ groupId: CLIENT_ID });
-	await connect();
-	await subscribe({ topic, fromBeginning: true });
-	await run({
-		eachMessage: async({ topic, partition, message }) => {
-			console.log('Message received');
-		},
-	});
-	run().catch(err => console.error(err));
+	const main = async () => {
+		await connect();
+		await subscribe({ topic, fromBeginning: true });
+		await run({
+			eachMessage: async({ topic, partition, message }) => {
+				console.log('Message received');
+			},
+		});
+	}
+	main().catch((err) => console.error(err));
 
 	ERROR_TYPES.map((type) => {
 		process.on(type, async (e) => {
