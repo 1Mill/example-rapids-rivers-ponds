@@ -1,5 +1,6 @@
 import { createConsumerInstance } from './createConsumerInstance';
 import { deleteConsumerInstance } from './deleteConsumerInstance';
+import { getRecords } from './getRecords';
 import { subscribeToTopic } from './subscribeToTopic';
 
 const CONSUMER = 'my-json-consumer';
@@ -24,6 +25,12 @@ export const subscribe = async () => {
 		});
 
 		// 3. Fetch records collected by consumer instance
+		const data = await getRecords({
+			consumer: CONSUMER,
+			instanceId: INSTANCE_ID,
+			proxyUrl: RAPIDS_PROXY_URL,
+		});
+		console.log(data);
 
 		// 4. Delete consumer instance
 		await deleteConsumerInstance({
