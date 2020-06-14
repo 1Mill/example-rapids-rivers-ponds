@@ -4,5 +4,5 @@ subscribe({
 	handler: ({ data }) => {
 		console.log(data);
 	},
-	topic: "hello-world",
+	topic: 'hello-world',
 });
