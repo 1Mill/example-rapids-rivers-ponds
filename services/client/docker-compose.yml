@@ -5,6 +5,7 @@ services:
     build: ./services/client
     depends_on:
       - producer
+      - subscriber
     environment:
       NODE_ENV: development
       PORT: 8080
