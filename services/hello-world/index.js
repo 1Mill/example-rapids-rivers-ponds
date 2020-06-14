@@ -11,10 +11,9 @@ const main = async() => {
 			url: process.env.RAPIDS_URL,
 		}).subscribe({
 			onEvent: ({ event }) => {
-				console.log('Hello world!');
-				const test = JSON.parse(event.message.value)
-				console.log(test);
-				console.log(JSON.parse(test.data));
+				const value = JSON.parse(event.message.value);
+				const data = JSON.parse(value.data);
+				console.log(data);
 			},
 			topics: TOPICS,
 		})
