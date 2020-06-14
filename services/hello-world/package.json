@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@1mill/waterway": "^0.2.3"
+    "kafkajs": "^1.12.0"
   }
 }
