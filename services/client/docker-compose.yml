@@ -29,6 +29,19 @@ services:
     volumes:
       - ./services/producer:/app
 
+  subscriber:
+    build: ./services/subscriber
+    environment:
+      NODE_ENV: development
+      PORT: 8083
+      RAPIDS_URL: rapids:9092
+    networks:
+      - services-network
+    ports:
+      - 8083:8083
+    volumes:
+      - ./services/subscriber:/app
+
 networks:
   services-network:
     name: services-network
