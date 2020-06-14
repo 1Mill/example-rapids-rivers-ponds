@@ -1,3 +1,4 @@
+const { enrich } = require('./utilities/cloudevents/enrich');
 const { getData } = require('./utilities/cloudevents/getData');
 const { subscribe } = require('./utilities/subscribe');
 
@@ -11,6 +12,12 @@ subscribe({
 		console.log(data);
 
 		// Enrich event
+		const enrichedCloudevent = enrich({
+			cloudevent,
+			data: { testing: 'testing' },
+		});
+		console.log(enrichedCloudevent);
+
 
 		// Publish enriched event to rapids
 	},
