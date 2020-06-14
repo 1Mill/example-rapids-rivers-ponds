@@ -1,7 +1,5 @@
 const getData = ({ cloudevent }) => {
-	const value = JSON.parse(cloudevent.message.value);
-	const data = JSON.parse(value.data);
-	return data;
+	return JSON.parse(cloudevent.data);
 };
 
 module.exports = { getData };

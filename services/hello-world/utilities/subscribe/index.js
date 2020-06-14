@@ -1,5 +1,6 @@
 const { ERROR_TYPES, SIGNAL_TRAPS } = require('../../lib/constants');
 const { Kafka } = require('kafkajs');
+const { toCloudevent } = require('../kafkaevent/toCloudevent');
 
 const CLIENT_ID = 'hello-world-service';
 const KAFKA = new Kafka({
@@ -15,7 +16,8 @@ const subscribe = async ({ handler, topic }) => {
 		await connect();
 		await subscribe({ topic, fromBeginning: true });
 		await run({
-			eachMessage: async (cloudevent) => {
+			eachMessage: async (kafkaevent) => {
+				const cloudevent = toCloudevent({ kafkaevent });
 				handler({ cloudevent });
 			},
 		});
