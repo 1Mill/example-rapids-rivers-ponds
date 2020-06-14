@@ -19,7 +19,6 @@ const publish = async ({ id, payloads, topic }) => {
 				id,
 				specversion: '1.0',
 				time: new Date().toISOString(),
-				type: `com.product.${topic}`,
 			}),
 		})),
 		topic,
