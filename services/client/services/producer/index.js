@@ -1,7 +1,7 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const ioRedisAdapter = require('socket.io-redis');
+const { KAFKA_EVENT_TYPE, publish } = require('./utilities/publish');
 const { create } = require('./utilities/cloudevents/create');
-const { publish } = require('./utilities/publish');
 const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
 
 const server = require('http').createServer();
@@ -30,7 +30,7 @@ io.on('connect', (socket) => {
 				publish({
 					brokers: [ process.env.RAPIDS_URL ],
 					event: kafkaEvent,
-					eventType: 'kafka',
+					eventType: KAFKA_EVENT_TYPE,
 					id: 'client-producer-service',
 				});
 			});
