@@ -3,23 +3,10 @@ const { getData } = require('./utilities/cloudevents/getData');
 const { subscribe } = require('./utilities/subscribe');
 
 subscribe({
-	handler: ({ cloudevent }) => {
-		// Parse data
-		const data = getData({ cloudevent });
-
-		// Buisness / Domain logic
-		if (data === '') { return; }
-		console.log(data);
-
-		// Enrich event
-		const enrichedCloudevent = enrich({
-			cloudevent,
-			data: { testing: 'testing' },
-		});
-		console.log(enrichedCloudevent);
-
-
-		// Publish enriched event to rapids
-	},
-	topic: 'hello-world',
+	brokers: [ process.env.RAPIDS_URL ],
+	eventType: 'kafka',
+	handler: ({ cloudevent }) => { console.log('Something happened'); },
+	id: 'hello-world-service',
+	type: 'hello-world-2020-06-14',
 });
+
