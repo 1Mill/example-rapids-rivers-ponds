@@ -22,6 +22,7 @@ const subscribe = async ({ brokers, eventType, handler, id, type }) => {
 		await subscribe({ topic: type, fromBeginning: true });
 		await run({
 			eachMessage: async (kafkaEvent) => {
+				// TODO: Abstract into "event" domain (e.g. event:, eventType:)
 				const cloudevent = getCloudevent({ kafkaEvent });
 				handler({ cloudevent });
 			},
