@@ -27,6 +27,12 @@ io.on('connect', (socket) => {
 					type,
 				});
 				const kafkaEvent = toKafkaEvent({ cloudevent });
+				publish({
+					brokers: [ process.env.RAPIDS_URL ],
+					event: kafkaEvent,
+					eventType: 'kafka',
+					id: 'client-producer-service',
+				});
 			});
 		} catch (err) {
 			console.error(err);
