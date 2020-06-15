@@ -1,23 +1,34 @@
+const { ERROR_TYPES, SIGNAL_TRAPS } = require('../lib/constants');
 const { Kafka } = require('kafkajs');
+const { getCloudevent } = require('./kafkaEvent/getCloudevent');
 
-const CLIENT_ID = 'client-subscriber-service';
-const KAFKA = new Kafka({
-	brokers: [process.env.RAPIDS_URL],
-	clientId: CLIENT_ID,
-});
-const ERROR_TYPES = ["unhandledRejection", "uncaughtException"];
-const SIGNAL_TRAPS = ["SIGTERM", "SIGINT", "SIGUSR2"];
+const subscribe = async ({ brokers, eventType, handler, id, type }) => {
+	// TODO: Support other event types (e.g. rabbitmq)
+	if (eventType !== 'kafka') { throw Error('Invalid event type'); }
 
-const subscribe = async({ id, topic }) => {
-	const { connect, disconnect, run, subscribe } = KAFKA.consumer({ groupId: CLIENT_ID });
-	await connect();
-	await subscribe({ topic, fromBeginning: true });
-	await run({
-		eachMessage: async({ topic, partition, message }) => {
-			console.log('Message received');
-		},
+	const kakfa = new Kafka({
+		brokers,
+		clientId: id,
 	});
-	run().catch(err => console.error(err));
+	const {
+		connect,
+		disconnect,
+		run,
+		subscribe,
+	} = kakfa.consumer({ groupId: id });
+
+	const main = async () => {
+		await connect();
+		await subscribe({ topic: type, fromBeginning: true });
+		await run({
+			eachMessage: async (kafkaEvent) => {
+				// TODO: Abstract into "event" domain (e.g. event:, eventType:)
+				const cloudevent = getCloudevent({ kafkaEvent });
+				await handler({ cloudevent });
+			},
+		});
+	};
+	main().catch((err) => console.error(err));
 
 	ERROR_TYPES.map((type) => {
 		process.on(type, async (e) => {
