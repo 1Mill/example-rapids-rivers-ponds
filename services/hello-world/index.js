@@ -1,10 +1,14 @@
 const { enrich } = require('./utilities/cloudevents/enrich');
+const { isEnriched } = require('./utilities/cloudevents/isEnriched');
 const { subscribe } = require('./utilities/subscribe');
 
 subscribe({
 	brokers: [ process.env.RAPIDS_URL ],
 	eventType: 'kafka',
 	handler: ({ cloudevent }) => {
+		// Escape clauses
+		if (isEnriched({ cloudevent })) { return; }
+
 		// Fetch application data
 
 		// Perform buisness / domain logic

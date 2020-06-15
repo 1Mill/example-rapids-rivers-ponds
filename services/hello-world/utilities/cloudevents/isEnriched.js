@@ -1,5 +1,5 @@
 const isEnriched = ({ cloudevent }) => {
-	return false;
+	return cloudevent.hasOwnProperty('enrichment');
 };
 
 module.exports = { isEnriched };
