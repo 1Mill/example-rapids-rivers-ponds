@@ -1,6 +1,6 @@
-const { ERROR_TYPES, SIGNAL_TRAPS } = require('../../lib/constants');
+const { ERROR_TYPES, SIGNAL_TRAPS } = require('../lib/constants');
 const { Kafka } = require('kafkajs');
-const { getCloudevent } = require('../kafkaEvent/getCloudevent');
+const { getCloudevent } = require('./kafkaEvent/getCloudevent');
 
 const subscribe = async ({ brokers, eventType, handler, id, type }) => {
 	// TODO: Support other event types (e.g. rabbitmq)
@@ -24,7 +24,7 @@ const subscribe = async ({ brokers, eventType, handler, id, type }) => {
 			eachMessage: async (kafkaEvent) => {
 				// TODO: Abstract into "event" domain (e.g. event:, eventType:)
 				const cloudevent = getCloudevent({ kafkaEvent });
-				handler({ cloudevent });
+				await handler({ cloudevent });
 			},
 		});
 	};
