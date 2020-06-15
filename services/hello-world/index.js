@@ -20,13 +20,15 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(data);
+		const enrichment = data.split('').reverse().join('');
+		console.log(enrichment);
 
 		// Enrich event
 		// TODO: Abstract enrichment work into framework with
 		// TODO: value returned from buisness / domain logic
 		const enrichedCloudevent = enrich({
 			cloudevent,
-			enrichment: 'testing',
+			enrichment,
 		});
 
 		// Publish enriched event
