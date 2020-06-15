@@ -14,7 +14,12 @@ subscribe({
 		// TODO: Abstract enrichment check into framework
 		if (isEnriched({ cloudevent })) { return; }
 
+		// Fetch buisness data
+		// TODO: Abstract data parsing into framework;
+		const data = JSON.parse(cloudevent.data);
+
 		// Perform buisness / domain logic
+		console.log(data);
 
 		// Enrich event
 		// TODO: Abstract enrichment work into framework
