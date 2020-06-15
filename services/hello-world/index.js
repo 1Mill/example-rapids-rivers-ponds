@@ -11,19 +11,20 @@ subscribe({
 	eventType: KAFKA_EVENT_TYPE,
 	handler: async ({ cloudevent }) => {
 		// Escape clauses
+		// TODO: Abstract enrichment check into framework
 		if (isEnriched({ cloudevent })) { return; }
-
-		// Fetch application data
 
 		// Perform buisness / domain logic
 
 		// Enrich event
+		// TODO: Abstract enrichment work into framework
 		const enrichedCloudevent = enrich({
 			cloudevent,
 			enrichment: 'testing',
 		});
 
 		// Publish enriched event
+		// TODO: Abstract publishing work into framework
 		await publish({
 			brokers: [ process.env.RAPIDS_URL ],
 			event: toKafkaEvent({ cloudevent: enrichedCloudevent }),
