@@ -20,6 +20,7 @@ subscribe({
 		});
 
 		// Publish enriched event
+
 	 },
 	id: 'hello-world-service',
 	type: 'hello-world-2020-06-14',
