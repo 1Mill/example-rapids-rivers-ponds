@@ -22,7 +22,7 @@ io.on('connect', (socket) => {
 				const cloudevent = create({
 					data: payload,
 					id: socket.id,
-					source: socket.nsp,
+					source: packet.nsp,
 					type,
 				});
 				// const kafkaEvent = toKafkaEvent({ cloudevent });
