@@ -1,5 +1,4 @@
 const { enrich } = require('./utilities/cloudevents/enrich');
-const { getData } = require('./utilities/cloudevents/getData');
 const { subscribe } = require('./utilities/subscribe');
 
 subscribe({
