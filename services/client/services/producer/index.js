@@ -26,10 +26,9 @@ io.on('connect', (socket) => {
 					source: packet.nsp,
 					type,
 				});
-				const kafkaEvent = toKafkaEvent({ cloudevent });
 				publish({
 					brokers: [ process.env.RAPIDS_URL ],
-					event: kafkaEvent,
+					event: toKafkaEvent({ cloudevent }),
 					eventType: KAFKA_EVENT_TYPE,
 					id: 'client-producer-service',
 				});
