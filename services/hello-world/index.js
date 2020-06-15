@@ -22,7 +22,8 @@ subscribe({
 		console.log(data);
 
 		// Enrich event
-		// TODO: Abstract enrichment work into framework
+		// TODO: Abstract enrichment work into framework with
+		// TODO: value returned from buisness / domain logic
 		const enrichedCloudevent = enrich({
 			cloudevent,
 			enrichment: 'testing',
