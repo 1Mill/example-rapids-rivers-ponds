@@ -2,6 +2,7 @@ const ioMiddlewareWildcard = require('socketio-wildcard')();
 const ioRedisAdapter = require('socket.io-redis');
 const { create } = require('./utilities/cloudevents/create');
 const { publish } = require('./utilities/publish');
+const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
 
 const server = require('http').createServer();
 
@@ -25,13 +26,7 @@ io.on('connect', (socket) => {
 					source: packet.nsp,
 					type,
 				});
-				// const kafkaEvent = toKafkaEvent({ cloudevent });
-				// publish({ kafkaEvent });
-				// publish({
-				// 	id: socket.id,
-				// 	payloads,
-				// 	type,
-				// });
+				const kafkaEvent = toKafkaEvent({ cloudevent });
 			});
 		} catch (err) {
 			console.error(err);
