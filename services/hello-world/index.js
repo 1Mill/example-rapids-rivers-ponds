@@ -1,14 +1,17 @@
-const { KAFKA_EVENT_TYPE, publish } = require('./utilities/publish');
-const { enrich } = require('./utilities/cloudevents/enrich');
-const { isEnriched } = require('./utilities/cloudevents/isEnriched');
-const { subscribe } = require('./utilities/subscribe');
-const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
+const {
+	KAFKA_EVENTTYPE,
+	enrich,
+	isEnriched,
+	publish,
+	subscribe,
+	toEventType,
+} = require('@1mill/cloudevents');
 
 const ID = 'hello-world-service';
 
 subscribe({
 	brokers: [ process.env.RAPIDS_URL ],
-	eventType: KAFKA_EVENT_TYPE,
+	eventType: KAFKA_EVENTTYPE,
 	handler: async ({ cloudevent }) => {
 		// Escape clauses
 		// TODO: Abstract enrichment check into framework
@@ -35,8 +38,11 @@ subscribe({
 		// TODO: Abstract publishing work into framework
 		await publish({
 			brokers: [ process.env.RAPIDS_URL ],
-			event: toKafkaEvent({ cloudevent: enrichedCloudevent }),
-			eventType: KAFKA_EVENT_TYPE,
+			event: toEventType({
+				cloudevent: enrichedCloudevent,
+				eventType: KAFKA_EVENTTYPE,
+			}),
+			eventType: KAFKA_EVENTTYPE,
 			id: ID,
 		});
 	 },

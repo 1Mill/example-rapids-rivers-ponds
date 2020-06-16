@@ -10,6 +10,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "kafkajs": "^1.12.0"
+    "@1mill/cloudevents": "0.0.3"
   }
 }
