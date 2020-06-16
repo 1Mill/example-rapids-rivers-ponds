@@ -4,6 +4,7 @@ const { enrich } = require('./utilities/enrich');
 const { fromEventType } = require('./utilities/fromEventType');
 const { isEnriched } = require('./utilities/isEnriched');
 const { publish } = require('./utilities/publish');
+const { subscribe } = require('./utilities/subscribe');
 const { toEventType } = require('./utilities/toEventType');
 
 module.exports = Object.freeze({
@@ -13,5 +14,6 @@ module.exports = Object.freeze({
 	fromEventType,
 	isEnriched,
 	publish,
+	subscribe,
 	toEventType,
 });
