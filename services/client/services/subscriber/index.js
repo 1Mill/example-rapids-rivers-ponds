@@ -32,8 +32,6 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(id);
-		io.emit('hello-world')
-		// io.sockets.connected[ id ].emit('hello-world', 'hello this is a private msg');
 	},
 	id: 'client-subscriber-service',
 	type: 'hello-world-2020-06-14',
