@@ -1,4 +1,5 @@
 const Redis = require("ioredis");
+const ioMiddlewareWildcard = require('socketio-wildcard')();
 const redisAdapter = require("socket.io-redis");
 const { KAFKA_EVENT_TYPE } = require('./lib/constants');
 const { create } = require('./utilities/cloudevents/create');
@@ -18,6 +19,7 @@ io.adapter(redisAdapter({
 	pubClient: new Redis.Cluster(redisClusters),
 	subClient: new Redis.Cluster(redisClusters),
 }));
+io.use(ioMiddlewareWildcard);
 
 subscribe({
 	brokers: [process.env.RAPIDS_URL],
