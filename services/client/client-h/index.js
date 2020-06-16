@@ -1,5 +1,5 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
-const redisAdapter = require("socket.io-redis");
+const redisAdapter = require('socket.io-redis');
 const { KAFKA_EVENT_TYPE } = require('./lib/constants');
 const { create } = require('./utilities/cloudevents/create');
 const { isEnriched } = require('./utilities/cloudevents/isEnriched');
@@ -8,7 +8,7 @@ const { subscribe } = require('./utilities/subscribe');
 const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
 
 const server = require('http').createServer();
-const io = require("socket.io")(server);
+const io = require('socket.io')(server);
 
 io.adapter(redisAdapter({
 	host: process.env.REDIS_HOST,
