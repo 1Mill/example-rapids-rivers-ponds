@@ -1,8 +1,11 @@
 const Redis = require("ioredis");
 const redisAdapter = require("socket.io-redis");
 const { KAFKA_EVENT_TYPE } = require('./lib/constants');
+const { create } = require('./utilities/cloudevents/create');
 const { isEnriched } = require('./utilities/cloudevents/isEnriched');
+const { publish } = require('./utilities/publish');
 const { subscribe } = require('./utilities/subscribe');
+const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
 
 const server = require('http').createServer();
 const io = require("socket.io")(server);
@@ -36,6 +39,32 @@ subscribe({
 	id: 'client-subscriber-service',
 	type: 'hello-world-2020-06-14',
 });
+
+
+io.on('connect', (socket) => {
+	socket.on('*', (packet) => {
+		try {
+			const [{ type, payloads }] = packet.data;
+			payloads.forEach(payload => {
+				const cloudevent = create({
+					data: payload,
+					id: socket.id,
+					source: packet.nsp,
+					type,
+				});
+				publish({
+					brokers: [process.env.RAPIDS_URL],
+					event: toKafkaEvent({ cloudevent }),
+					eventType: KAFKA_EVENT_TYPE,
+					id: 'client-producer-service',
+				});
+			});
+		} catch (err) {
+			console.error(err);
+		}
+	});
+});
+
 
 server.listen(process.env.PORT, () => {
 	console.log(`Listening on ${process.env.HOST}:${process.env.PORT}`);
