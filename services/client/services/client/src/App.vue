@@ -1,6 +1,5 @@
 <script>
-import { produce } from './utilities/produce';
-import { subscribe } from './utilities/subscribe';
+import { publish, subscribe } from './utilities/cloudevent';
 
 export default {
 	data() {
@@ -12,8 +11,7 @@ export default {
 		subscribe();
 	},
 	methods: {
-		produce,
-		subscribe,
+		publish,
 	},
 };
 </script>
@@ -21,7 +19,7 @@ export default {
 <template>
 	<main>
 		<input type='text' v-model='payload'/>
-		<button @click='produce({ type: "hello-world-2020-06-14", payloads: [ payload ] })'>
+		<button @click='publish({ type: "hello-world-2020-06-14", payloads: [ payload ] })'>
 			Create single "hello-world-2020-06-14" type (e.g. kafka-topic)
 		</button>
 		<!-- <button @click='subscribe'>

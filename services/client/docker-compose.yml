@@ -1,16 +1,14 @@
 version: '3.8'
 
 services:
-  app:
+  client:
     build: ./services/client
     depends_on:
-      - producer
-      - subscriber
+      - client-h
     environment:
       NODE_ENV: development
       PORT: 8080
-      VUE_APP_PRODUCER_URL: http://localhost:8081/
-      VUE_APP_SUBSCRIBER_URL: http://localhost:8083/
+      VUE_APP_CLIENT_H_URL: http://localhost:8081/
     networks:
       - services-network
     ports:
@@ -18,8 +16,8 @@ services:
     volumes:
       - ./services/client:/app
 
-  producer:
-    build: ./services/producer
+  client-h:
+    build: ./services/client-h
     depends_on:
       - redis
     environment:
@@ -33,7 +31,7 @@ services:
     ports:
       - 8081:8081
     volumes:
-      - ./services/producer:/app
+      - ./services/client-h:/app
 
   redis:
     image: bitnami/redis-cluster:5.0.9
@@ -43,23 +41,6 @@ services:
       - services-network
     ports:
       - 6379:6379
-
-  subscriber:
-    build: ./services/subscriber
-    depends_on:
-      - redis
-    environment:
-      NODE_ENV: development
-      PORT: 8083
-      RAPIDS_URL: rapids:9092
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
-    networks:
-      - services-network
-    ports:
-      - 8083:8083
-    volumes:
-      - ./services/subscriber:/app
 
 networks:
   services-network:
