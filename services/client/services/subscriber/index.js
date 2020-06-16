@@ -32,7 +32,7 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(id);
-		io.to(id).emit('hello-world', "testing");
+		io.emit('hello-world')
 		// io.sockets.connected[ id ].emit('hello-world', 'hello this is a private msg');
 	},
 	id: 'client-subscriber-service',
