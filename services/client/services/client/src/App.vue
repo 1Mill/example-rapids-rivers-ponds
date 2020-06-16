@@ -1,12 +1,15 @@
 <script>
 import { produce } from './utilities/produce';
-import { subscribe } from './utilities/rapids/subscribe';
+import { subscribe } from './utilities/subscribe';
 
 export default {
 	data() {
 		return {
 			payload: 'my-example-payload',
 		};
+	},
+	created() {
+		subscribe();
 	},
 	methods: {
 		produce,

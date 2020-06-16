@@ -2,6 +2,7 @@ const ioRedisAdapter = require('socket.io-redis');
 const { KAFKA_EVENT_TYPE } = require('./lib/constants');
 const { isEnriched } = require('./utilities/cloudevents/isEnriched');
 const { subscribe } = require('./utilities/subscribe');
+const { Socket } = require('dgram');
 
 const server = require('http').createServer();
 
@@ -29,6 +30,9 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(id);
+		io.on('connect', (socket) => {
+			socket.to(id).emit('Hello world!');
+		});
 
 	},
 	id: 'client-subscriber-service',
