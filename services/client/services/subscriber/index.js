@@ -1,18 +1,20 @@
-const ioRedisAdapter = require('socket.io-redis');
+const Redis = require("ioredis");
+const redisAdapter = require("socket.io-redis");
 const { KAFKA_EVENT_TYPE } = require('./lib/constants');
 const { isEnriched } = require('./utilities/cloudevents/isEnriched');
 const { subscribe } = require('./utilities/subscribe');
-const { Socket } = require('dgram');
 
 const server = require('http').createServer();
+const io = require("socket.io")(server);
 
-const io = require('socket.io')(server);
-io.adapter(
-	ioRedisAdapter({
-		host: process.env.REDIS_HOST,
-		port: process.env.REDIS_PORT,
-	})
-);
+const redisClusters = [{
+	host: process.env.REDIS_HOST,
+	port: process.env.REDIS_PORT,
+}];
+io.adapter(redisAdapter({
+	pubClient: new Redis.Cluster(redisClusters),
+	subClient: new Redis.Cluster(redisClusters),
+}));
 
 subscribe({
 	brokers: [process.env.RAPIDS_URL],
@@ -30,10 +32,8 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(id);
-		io.on('connect', (socket) => {
-			socket.to(id).emit('Hello world!');
-		});
-
+		io.to(id).emit('hello-world', "testing");
+		// io.sockets.connected[ id ].emit('hello-world', 'hello this is a private msg');
 	},
 	id: 'client-subscriber-service',
 	type: 'hello-world-2020-06-14',

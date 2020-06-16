@@ -8,7 +8,7 @@ export default {
 			payload: 'my-example-payload',
 		};
 	},
-	created() {
+	mounted() {
 		subscribe();
 	},
 	methods: {

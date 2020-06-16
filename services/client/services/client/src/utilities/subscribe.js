@@ -1,7 +1,10 @@
-// import io from "socket.io-client";
+import io from "socket.io-client";
 
-// const SOCKET = io(process.env.VUE_APP_SUBSCRIBER_URL);
+const SOCKET = io(process.env.VUE_APP_SUBSCRIBER_URL);
 
 export const subscribe = () => {
-	console.log('subscription');
+	console.log("mounted");
+	SOCKET.on('hello-world', () => {
+		console.log('testing');
+	});
 };

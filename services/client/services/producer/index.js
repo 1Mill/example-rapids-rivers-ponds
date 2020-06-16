@@ -1,18 +1,21 @@
+const Redis = require("ioredis");
 const ioMiddlewareWildcard = require('socketio-wildcard')();
-const ioRedisAdapter = require('socket.io-redis');
+const redisAdapter = require("socket.io-redis");
 const { KAFKA_EVENT_TYPE, publish } = require('./utilities/publish');
 const { create } = require('./utilities/cloudevents/create');
 const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
 
 const server = require('http').createServer();
+const io = require("socket.io")(server);
 
-const io = require('socket.io')(server);
-io.adapter(
-	ioRedisAdapter({
-		host: process.env.REDIS_HOST,
-		port: process.env.REDIS_PORT,
-	})
-);
+const redisClusters = [{
+	host: process.env.REDIS_HOST,
+	port: process.env.REDIS_PORT,
+}];
+io.adapter(redisAdapter({
+	pubClient: new Redis.Cluster(redisClusters),
+	subClient: new Redis.Cluster(redisClusters),
+}));
 io.use(ioMiddlewareWildcard);
 
 io.on('connect', (socket) => {
@@ -26,6 +29,7 @@ io.on('connect', (socket) => {
 					source: packet.nsp,
 					type,
 				});
+				console.log(cloudevent.id);
 				publish({
 					brokers: [ process.env.RAPIDS_URL ],
 					event: toKafkaEvent({ cloudevent }),

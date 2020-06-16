@@ -36,9 +36,13 @@ services:
       - ./services/producer:/app
 
   redis:
-    image: redis:5-alpine
+    image: bitnami/redis-cluster:5.0.9
+    environment:
+      REDIS_PORT: 6379
     networks:
       - services-network
+    ports:
+      - 6379:6379
 
   subscriber:
     build: ./services/subscriber
