@@ -34,13 +34,9 @@ services:
       - ./client-h:/app
 
   redis:
-    image: bitnami/redis-cluster:5.0.9
-    environment:
-      REDIS_PORT: 6379
+    image: redis:6-alpine
     networks:
       - services-network
-    ports:
-      - 6379:6379
 
 networks:
   services-network:
