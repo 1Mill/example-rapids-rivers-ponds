@@ -37,6 +37,7 @@ subscribe({
 
 		// Perform buisness / domain logic
 		console.log(id);
+		io.to(id).emit('hello-world');
 	},
 	id: 'client-subscriber-service',
 	type: 'hello-world-2020-06-14',
