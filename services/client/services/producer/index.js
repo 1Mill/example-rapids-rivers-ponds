@@ -29,6 +29,7 @@ io.on('connect', (socket) => {
 					source: packet.nsp,
 					type,
 				});
+				// TODO: Remove
 				console.log(cloudevent.id);
 				publish({
 					brokers: [ process.env.RAPIDS_URL ],
