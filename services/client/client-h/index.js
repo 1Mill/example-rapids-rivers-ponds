@@ -26,13 +26,15 @@ subscribe({
 
 		// Fetch buisness data
 		// TODO: Abstract data parsing into framework;
-		const data = JSON.parse(cloudevent.data);
-		const enrichment = JSON.parse(cloudevent.enrichment);
-		const { id } = cloudevent;
+		const {
+			enrichment,
+			id,
+			type,
+		} = cloudevent;
 
 		// Perform buisness / domain logic
 		console.log(id);
-		io.to(id).emit('hello-world');
+		io.to(id).emit(type, JSON.parse(enrichment));
 	},
 	id: 'client-subscriber-service',
 	type: 'hello-world-2020-06-14',

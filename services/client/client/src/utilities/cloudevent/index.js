@@ -6,8 +6,8 @@ export const publish = ({ type, payloads }) => {
 	SOCKET.emit({ type, payloads });
 };
 
-export const subscribe = () => {
-	SOCKET.on('hello-world', () => {
-		console.log('testing');
+export const subscribe = ({ hanlder, type }) => {
+	SOCKET.on(type, (payload) => {
+		hanlder({ payload });
 	});
 };

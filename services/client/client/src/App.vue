@@ -8,7 +8,10 @@ export default {
 		};
 	},
 	created() {
-		subscribe();
+		subscribe({
+			hanlder: ({ payload }) => { console.log(payload); },
+			type: 'hello-world-2020-06-14',
+		});
 	},
 	methods: {
 		publish,
