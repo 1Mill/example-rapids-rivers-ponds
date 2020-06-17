@@ -4,7 +4,7 @@ const ID = 'hello-world-service';
 
 subscribe({
 	eventType: KAFKA_EVENTTYPE,
-	handler: async ({ data, enrichment, isEnriched }) => {
+	handler: async ({ cloudevent, data, enrichment, isEnriched }) => {
 		if (isEnriched) { return; }
 		console.log(data);
 		return data.split('').reverse().join('');
