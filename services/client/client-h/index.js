@@ -3,7 +3,6 @@ const redisAdapter = require('socket.io-redis');
 const {
 	KAFKA_EVENTTYPE,
 	create,
-	isEnriched,
 	publish,
 	subscribe,
 	toEventType,
@@ -19,26 +18,16 @@ io.adapter(redisAdapter({
 io.use(ioMiddlewareWildcard);
 
 subscribe({
-	brokers: [process.env.RAPIDS_URL],
 	eventType: KAFKA_EVENTTYPE,
-	handler: async ({ cloudevent }) => {
-		// Escape clauses
-		// TODO: Abstract not enrichment check into framework
-		if (!isEnriched({ cloudevent })) { return; }
+	handler: async ({ cloudevent, data, enrichment, isEnriched }) => {
+		if (!isEnriched) { return; }
 
-		// Fetch buisness data
-		// TODO: Abstract data parsing into framework;
-		const {
-			enrichment,
-			id,
-			type,
-		} = cloudevent;
-
-		// Perform buisness / domain logic
+		const { id, type } = cloudevent;
 		console.log(id);
-		io.to(id).emit(type, JSON.parse(enrichment));
+		io.to(id).emit(type, enrichment);
 	},
 	id: 'client-subscriber-service',
+	subscribeTo: [ process.env.RAPIDS_URL ],
 	type: 'hello-world-2020-06-14',
 });
 
