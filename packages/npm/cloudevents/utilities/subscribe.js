@@ -49,7 +49,8 @@ const subscribe = async ({
 				});
 
 				// If enrichment value is returned, enrich
-				// cloudevent and publish back to rapids.
+				// cloudevent and publish it. Otherwise,
+				// do nothing.
 				if (enrichment === undefined) { return; }
 				const enrichedCloudevent = enrich({
 					cloudevent,
