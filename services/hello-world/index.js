@@ -4,12 +4,12 @@ const ID = 'hello-world-service';
 
 subscribe({
 	eventType: KAFKA_EVENTTYPE,
-	handler: async ({ cloudevent, data, isEnriched }) => {
+	handler: async ({ cloudevent, data, enrichment, isEnriched }) => {
 		if (isEnriched) { return; }
 
-		const enrichment = data.split('').reverse().join('')
-		console.log(`Turn "${data}" into "${enrichment}"`);
-		return enrichment;
+		const enrichmentValue = data.split('').reverse().join('')
+		console.log(`Turn "${data}" into "${enrichmentValue}"`);
+		return enrichmentValue;
 	},
 	id: ID,
 	publishTo: [ process.env.RAPIDS_URL ],
