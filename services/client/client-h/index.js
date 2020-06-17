@@ -1,11 +1,13 @@
 const ioMiddlewareWildcard = require('socketio-wildcard')();
 const redisAdapter = require('socket.io-redis');
-const { KAFKA_EVENT_TYPE } = require('./lib/constants');
-const { create } = require('./utilities/cloudevents/create');
-const { isEnriched } = require('./utilities/cloudevents/isEnriched');
-const { publish } = require('./utilities/publish');
-const { subscribe } = require('./utilities/subscribe');
-const { toKafkaEvent } = require('./utilities/cloudevents/toKafkaEvent');
+const {
+	KAFKA_EVENTTYPE,
+	create,
+	isEnriched,
+	publish,
+	subscribe,
+	toEventType,
+} = require('@1mill/cloudevents');
 
 const server = require('http').createServer();
 const io = require('socket.io')(server);
@@ -18,7 +20,7 @@ io.use(ioMiddlewareWildcard);
 
 subscribe({
 	brokers: [process.env.RAPIDS_URL],
-	eventType: KAFKA_EVENT_TYPE,
+	eventType: KAFKA_EVENTTYPE,
 	handler: async ({ cloudevent }) => {
 		// Escape clauses
 		// TODO: Abstract not enrichment check into framework
@@ -54,8 +56,11 @@ io.on('connect', (socket) => {
 				});
 				publish({
 					brokers: [process.env.RAPIDS_URL],
-					event: toKafkaEvent({ cloudevent }),
-					eventType: KAFKA_EVENT_TYPE,
+					event: toEventType({
+						cloudevent,
+						eventType: KAFKA_EVENTTYPE,
+					}),
+					eventType: KAFKA_EVENTTYPE,
 					id: 'client-producer-service',
 				});
 			});
