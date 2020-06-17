@@ -43,6 +43,8 @@ const subscribe = async ({
 					event,
 					eventType,
 				});
+				// ? Should just pass in {...cloudevent} with
+				// ? Other properties ?
 				const enrichment = await handler({
 					cloudevent,
 					data: JSON.parse(cloudevent.data),
