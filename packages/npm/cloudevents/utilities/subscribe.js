@@ -71,10 +71,10 @@ const subscribe = async ({
 	};
 	main().catch((err) => console.error(err));
 
-	ERROR_TYPES.map((type) => {
-		process.on(type, async (err) => {
+	ERROR_TYPES.map((errorType) => {
+		process.on(errorType, async (err) => {
 			try {
-				console.log(`process.on ${type}`);
+				console.log(`process.on ${errorType}`);
 				console.error(err);
 				await disconnect();
 				process.exit(0);
@@ -83,12 +83,12 @@ const subscribe = async ({
 			}
 		});
 	});
-	SIGNAL_TRAPS.map((type) => {
-		process.once(type, async () => {
+	SIGNAL_TRAPS.map((signalTrap) => {
+		process.once(signalTrap, async () => {
 			try {
 				await disconnect();
 			} finally {
-				process.kill(process.pid, type);
+				process.kill(process.pid, signalTrap);
 			}
 		});
 	});
