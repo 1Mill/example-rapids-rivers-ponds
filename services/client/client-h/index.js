@@ -23,7 +23,6 @@ subscribe({
 		if (!isEnriched) { return; }
 
 		const { id, type } = cloudevent;
-		console.log(id);
 		io.to(id).emit(type, enrichment);
 	},
 	id: 'client-subscriber-service',
