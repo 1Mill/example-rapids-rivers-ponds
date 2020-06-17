@@ -44,7 +44,7 @@ io.on('connect', (socket) => {
 					type,
 				});
 				publish({
-					brokers: [process.env.RAPIDS_URL],
+					publishTo: [process.env.RAPIDS_URL],
 					event: toEventType({
 						cloudevent,
 						eventType: KAFKA_EVENTTYPE,
