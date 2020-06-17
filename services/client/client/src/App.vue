@@ -5,11 +5,14 @@ export default {
 	data() {
 		return {
 			payload: 'my-example-payload',
+			returnedPayloads: [],
 		};
 	},
 	created() {
 		subscribe({
-			hanlder: ({ payload }) => { console.log(payload); },
+			handler: ({ payload }) => {
+				this.returnedPayloads.unshift(payload);
+			},
 			type: 'hello-world-2020-06-14',
 		});
 	},
@@ -30,5 +33,14 @@ export default {
 				Submit
 			</button>
 		</form>
+		<h2>Returned payloads</h2>
+		<ul>
+			<li
+			v-for='payload in returnedPayloads'
+			:key='payload'
+			>
+				{{ payload }}
+			</li>
+		</ul>
 	</main>
 </template>

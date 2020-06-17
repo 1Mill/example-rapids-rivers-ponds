@@ -6,8 +6,8 @@ export const publish = ({ type, payloads }) => {
 	SOCKET.emit({ type, payloads });
 };
 
-export const subscribe = ({ hanlder, type }) => {
+export const subscribe = ({ handler, type }) => {
 	SOCKET.on(type, (payload) => {
-		hanlder({ payload });
+		handler({ payload });
 	});
 };
