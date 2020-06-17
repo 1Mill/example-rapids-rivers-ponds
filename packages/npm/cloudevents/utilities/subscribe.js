@@ -42,7 +42,9 @@ const subscribe = async ({
 				const enrichment = await handler({
 					cloudevent,
 					data: JSON.parse(cloudevent.data),
-					enrichment: isEnriched({ cloudevent }) ? JSON.parse(cloudevent.enrichment) : undefined,
+					enrichment: isEnriched({ cloudevent })
+						? JSON.parse(cloudevent.enrichment)
+						: undefined,
 					isEnriched: isEnriched({ cloudevent }),
 				});
 
