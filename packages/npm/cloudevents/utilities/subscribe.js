@@ -12,7 +12,7 @@ const subscribe = async ({
 	id,
 	publishTo,
 	subscribeTo,
-	type,
+	types,
 }) => {
 	// TODO: Support other event types (e.g. rabbitmq)
 	if (eventType !== KAFKA_EVENTTYPE) {
@@ -32,7 +32,10 @@ const subscribe = async ({
 
 	const main = async () => {
 		await connect();
-		await subscribe({ topic: type, fromBeginning: true });
+		// ? Can we parallelize ?
+		await types.forEach(async (type) => {
+			await subscribe({ topic: type, fromBeginning: true });
+		});
 		await run({
 			eachMessage: async (event) => {
 				// Normal flow
