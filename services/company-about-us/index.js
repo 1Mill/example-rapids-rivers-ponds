@@ -1,6 +1,6 @@
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 
-const ID = 'company-history-awards-service';
+const ID = 'company-about-us-service';
 
 subscribe({
 	// eventType: KAFKA_EVENTTYPE,
