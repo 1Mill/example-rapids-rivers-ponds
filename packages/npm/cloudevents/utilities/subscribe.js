@@ -7,10 +7,11 @@ const { publish } = require('./publish');
 const { toEventType } = require('./toEventType');
 
 const subscribe = async ({
-	brokers,
 	eventType,
 	handler,
 	id,
+	publishTo,
+	subscribeTo,
 	type,
 }) => {
 	// TODO: Support other event types (e.g. rabbitmq)
@@ -19,7 +20,7 @@ const subscribe = async ({
 	}
 
 	const kakfa = new Kafka({
-		brokers,
+		brokers: subscribeTo,
 		clientId: id,
 	});
 	const {
@@ -57,9 +58,7 @@ const subscribe = async ({
 					enrichment,
 				});
 				await publish({
-					// TODO: Sub and pub brokers might not
-					// TODO: be the same (e.g. river vs rapids)
-					brokers,
+					brokers: publishTo,
 					event: toEventType({
 						cloudevent: enrichedCloudevent,
 						eventType,
