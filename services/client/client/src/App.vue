@@ -21,15 +21,17 @@ export default {
 
 <template>
 	<main>
-		<input type='text' v-model='payload'/>
-		<button @click='publish({
-			payloads: [ payload ],
-			type: "hello-world-2020-06-14",
-		})'>
-			Create single "hello-world-2020-06-14" type (e.g. kafka-topic)
-		</button>
-		<!-- <button @click='subscribe'>
-			Subscribe to "text-messages" topic
-		</button> -->
+		<form @submit.prevent=''>
+			<input type='text' v-model='payload'/>
+			<button @click='publish({
+				payloads: [ payload ],
+				type: "hello-world-2020-06-14",
+			})'>
+				Create single "hello-world-2020-06-14" type (e.g. kafka-topic)
+			</button>
+			<button type='submit'>
+				Submit
+			</button>
+		</form>
 	</main>
 </template>
