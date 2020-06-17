@@ -11,7 +11,7 @@ const publish = async ({ event, eventType, id, publishTo }) => {
 	});
 	const { connect, disconnect, send } = kafka.producer();
 	await connect();
-	await send({ ...event });
+	await send(event);
 	await disconnect();
 };
 
