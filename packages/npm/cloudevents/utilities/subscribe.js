@@ -1,8 +1,18 @@
 const { ERROR_TYPES, KAFKA_EVENTTYPE, SIGNAL_TRAPS } = require('../lib/constants');
 const { Kafka } = require('kafkajs');
+const { enrich } = require('./enrich');
 const { fromEventType } = require('./fromEventType');
+const { isEnriched } = require('./isEnriched');
+const { publish } = require('./publish');
+const { toEventType } = require('./toEventType');
 
-const subscribe = async ({ brokers, eventType, handler, id, type }) => {
+const subscribe = async ({
+	brokers,
+	eventType,
+	handler,
+	id,
+	type,
+}) => {
 	// TODO: Support other event types (e.g. rabbitmq)
 	if (eventType !== KAFKA_EVENTTYPE) {
 		throw Error("Invalid event type");
@@ -24,11 +34,36 @@ const subscribe = async ({ brokers, eventType, handler, id, type }) => {
 		await subscribe({ topic: type, fromBeginning: true });
 		await run({
 			eachMessage: async (event) => {
+				// Normal flow
 				const cloudevent = fromEventType({
 					event,
 					eventType,
 				});
-				await handler({ cloudevent });
+				const enrichment = await handler({
+					cloudevent,
+					data: JSON.parse(cloudevent.data),
+					enrichment: isEnriched({ cloudevent }) ? JSON.parse(cloudevent.enrichment) : undefined,
+					isEnriched: isEnriched({ cloudevent }),
+				});
+
+				// If enrichment value is returned, enrich
+				// cloudevent and publish back to rapids.
+				if (enrichment === undefined) { return; }
+				const enrichedCloudevent = enrich({
+					cloudevent,
+					enrichment,
+				});
+				await publish({
+					// TODO: Sub and pub brokers might not
+					// TODO: be the same (e.g. river vs rapids)
+					brokers,
+					event: toEventType({
+						cloudevent: enrichedCloudevent,
+						eventType,
+					}),
+					eventType,
+					id,
+				});
 			},
 		});
 	};
