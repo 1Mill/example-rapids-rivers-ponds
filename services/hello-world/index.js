@@ -14,5 +14,5 @@ subscribe({
 	id: ID,
 	publishTo: [ process.env.RAPIDS_URL ],
 	subscribeTo: [ process.env.RAPIDS_URL ],
-	type: 'hello-world-2020-06-14',
+	types: [ 'hello-world-2020-06-14' ],
 });
