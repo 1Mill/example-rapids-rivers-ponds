@@ -58,7 +58,7 @@ const subscribe = async ({
 					enrichment,
 				});
 				await publish({
-					brokers: publishTo,
+					publishTo,
 					event: toEventType({
 						cloudevent: enrichedCloudevent,
 						eventType,
