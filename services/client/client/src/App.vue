@@ -36,8 +36,8 @@ export default {
 		<h2>Returned payloads</h2>
 		<ul>
 			<li
-			v-for='payload in returnedPayloads'
-			:key='payload'
+			v-for='(payload, index) in returnedPayloads'
+			:key='`${payload}-${index}`'
 			>
 				{{ payload }}
 			</li>
