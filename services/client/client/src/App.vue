@@ -22,7 +22,10 @@ export default {
 <template>
 	<main>
 		<input type='text' v-model='payload'/>
-		<button @click='publish({ type: "hello-world-2020-06-14", payloads: [ payload ] })'>
+		<button @click='publish({
+			payloads: [ payload ],
+			type: "hello-world-2020-06-14",
+		})'>
 			Create single "hello-world-2020-06-14" type (e.g. kafka-topic)
 		</button>
 		<!-- <button @click='subscribe'>
