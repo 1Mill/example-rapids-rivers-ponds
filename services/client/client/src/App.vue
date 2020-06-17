@@ -15,6 +15,10 @@ export default {
 			},
 			type: 'hello-world-2020-06-14',
 		});
+		publish({
+			payloads: [ 'detaerc-morf-si-siht' ],
+			type: 'hello-world-2020-06-14',
+		});
 	},
 	methods: {
 		publish,
