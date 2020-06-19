@@ -34,13 +34,7 @@ export default {
 		})
 
 		// Get employee data
-		publish({ type: 'company-employes.index.2020-06-18' })
-		subscribe({
-			handler: ({ payload }) => {
-				this.employees = payload
-			},
-			type: 'company-employes.index.2020-06-18',
-		})
+		this.getCompanyEmployeeData();
 	},
 	methods: {
 		publish,
@@ -60,6 +54,19 @@ export default {
 
 			// Reset form
 			this.newEmployee = {};
+
+			setTimeout(() => {
+				this.getCompanyEmployeeData();
+			}, 1000);
+		},
+		getCompanyEmployeeData() {
+			publish({ type: 'company-employes.index.2020-06-18' })
+			subscribe({
+				handler: ({ payload }) => {
+					this.employees = payload
+				},
+				type: 'company-employes.index.2020-06-18',
+			})
 		},
 	},
 };
