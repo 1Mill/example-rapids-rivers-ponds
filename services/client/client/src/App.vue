@@ -4,6 +4,7 @@ import { publish, subscribe } from './utilities/cloudevent';
 export default {
 	data() {
 		return {
+			aboutTheCompanyHtml: '<h1>testing</h1>',
 			payload: 'my-example-payload',
 			returnedPayloads: [],
 		};
@@ -19,6 +20,15 @@ export default {
 			payloads: [ 'detaerc-morf-si-siht' ],
 			type: 'hello-world-2020-06-14',
 		});
+
+		// Get company history
+		publish({ type: 'get.company-about-us.2020-06-16' }),
+		subscribe({
+			handler: ({ payload }) => {
+				this.aboutTheCompanyHtml = payload;
+			},
+			type: 'get.company-about-us.2020-06-16'
+		})
 	},
 	methods: {
 		publish,
@@ -46,5 +56,8 @@ export default {
 				{{ payload }}
 			</li>
 		</ul>
+
+		<h1>History of the company</h1>
+		<div v-html='aboutTheCompanyHtml'></div>
 	</main>
 </template>
