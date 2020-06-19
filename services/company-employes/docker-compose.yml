@@ -6,8 +6,8 @@ services:
     depends_on:
       - database
     environment:
-      DATABASE_NAME: development
-      DATABASE_URL: mongodb://database:27017
+      DATABASE_NAME: ${DATABASE_TABLE}
+      DATABASE_URL: mongodb://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@database:27017
       NODE_ENV: development
       RAPIDS_URL: rapids:9092
     networks:
@@ -18,9 +18,9 @@ services:
   database:
     image: mongo:4.2
     environment:
-      MONGO_INITDB_DATABASE: development
-      MONGO_INITDB_ROOT_PASSWORD: placeholder-password
-      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_DATABASE: ${DATABASE_TABLE}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME}
     networks:
       - services-network
     volumes:
