@@ -10,7 +10,7 @@ export default {
 		};
 	},
 	created() {
-		// Get mesasge back from hello world service
+		// Get message back from hello world service
 		subscribe({
 			handler: ({ payload }) => {
 				this.returnedPayloads.unshift(payload);
