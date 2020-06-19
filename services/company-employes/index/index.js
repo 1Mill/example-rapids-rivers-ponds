@@ -31,4 +31,10 @@ client.connect((err) => {
 		subscribeTo: [process.env.RAPIDS_URL],
 		types: ['company-employes.index.2020-06-18'],
 	});
+
+	process.on('SIGINT', () => {
+		client.close();
+		console.log('Closed connection to database');
+		process.exit(0);
+	})
 });
