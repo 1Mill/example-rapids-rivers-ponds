@@ -23,12 +23,21 @@ export default {
 		});
 
 		// Get company history
-		publish({ type: 'get.company-about-us.2020-06-16' }),
+		publish({ type: 'get.company-about-us.2020-06-16' })
 		subscribe({
 			handler: ({ payload }) => {
 				this.aboutTheCompanyHtml = payload;
 			},
 			type: 'get.company-about-us.2020-06-16'
+		})
+
+		// Get employee data
+		publish({ type: 'company-employes.index.2020-06-18' })
+		subscribe({
+			handler: ({ payload }) => {
+				console.log(payload)
+			},
+			type: 'company-employes.index.2020-06-18',
 		})
 	},
 	methods: {

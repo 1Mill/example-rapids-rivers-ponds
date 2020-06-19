@@ -1,18 +1,15 @@
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 
-const ID = 'hello-world-service';
+const ID = 'company-employes-index-service';
 
 subscribe({
 	eventType: KAFKA_EVENTTYPE,
-	handler: async ({ cloudevent, data, enrichment, isEnriched }) => {
+	handler: async ({ isEnriched }) => {
 		if (isEnriched) { return; }
-
-		const enrichmentValue = data.split('').reverse().join('')
-		console.log(`Turn "${data}" into "${enrichmentValue}"`);
-		return enrichmentValue;
+		return 'testing';
 	},
 	id: ID,
 	publishTo: [ process.env.RAPIDS_URL ],
 	subscribeTo: [ process.env.RAPIDS_URL ],
-	types: [ 'hello-world-2020-06-14' ],
+	types: [ 'company-employes.index.2020-06-18' ],
 });

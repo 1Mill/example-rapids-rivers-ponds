@@ -33,6 +33,7 @@ subscribe({
 	id: 'client-subscriber-service',
 	subscribeTo: [process.env.RAPIDS_URL],
 	types: [
+		'company-employes.index.2020-06-18',
 		'get.company-about-us.2020-06-16',
 		'hello-world-2020-06-14',
 	],
