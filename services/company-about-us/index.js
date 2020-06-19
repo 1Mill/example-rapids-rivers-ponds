@@ -21,5 +21,5 @@ subscribe({
 	id: ID,
 	publishTo: [ process.env.RAPIDS_URL ],
 	subscribeTo: [ process.env.RAPIDS_URL ],
-	type: 'get.company-about-us.2020-06-16',
+	types: [ 'get.company-about-us.2020-06-16' ],
 });
