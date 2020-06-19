@@ -87,5 +87,10 @@ export default {
 				{{ employee.description }}
 			</div>
 		</div>
+		<form @submit.prevent='publish({ type: "company-employes.create.2020-06-19" })'>
+			<button>
+				Create new employee
+			</button>
+		</form>
 	</main>
 </template>

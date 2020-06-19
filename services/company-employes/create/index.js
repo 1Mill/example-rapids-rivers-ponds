@@ -2,7 +2,7 @@ const assert = require('assert');
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 const { MongoClient } = require('mongodb');
 
-const ID = 'company-employes-index-service';
+const ID = 'company-employes-create-service';
 
 const client = new MongoClient(process.env.DATABASE_URL);
 const main = async () => {
