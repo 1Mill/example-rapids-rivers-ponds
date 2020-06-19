@@ -12,10 +12,15 @@ const main = async () => {
 		const collection = db.collection('employees');
 
 		subscribe({
-			handler: async ({ isEnriched }) => {
+			handler: async ({ data, isEnriched }) => {
 				if (isEnriched) { return; }
 
-				console.log('Create new employees!');
+				await collection.insertOne({
+					description: data.description,
+					id: Math.random(),
+					name: data.name,
+					title: data.title,
+				});
 			},
 			id: ID,
 			publishEventType: KAFKA_EVENTTYPE,
