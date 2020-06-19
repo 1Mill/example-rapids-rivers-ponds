@@ -6,6 +6,8 @@ services:
     depends_on:
       - database
     environment:
+      DATABASE_NAME: development
+      DATABASE_URL: mongodb://database:27017
       NODE_ENV: development
       RAPIDS_URL: rapids:9092
     networks:

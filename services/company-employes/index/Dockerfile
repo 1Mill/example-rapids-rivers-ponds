@@ -10,6 +10,9 @@ RUN npm install
 
 COPY . .
 
-ENV RAPIDS_URL=${RAPIDS_URL}
+ENV \
+	DATABASE_NAME=${DATABASE_NAME} \
+	DATABASE_URL=${DATABASE_URL} \
+	RAPIDS_URL=${RAPIDS_URL}
 
 CMD [ "npm", "run", "start" ]
