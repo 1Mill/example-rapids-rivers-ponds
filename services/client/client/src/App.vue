@@ -5,6 +5,7 @@ export default {
 	data() {
 		return {
 			aboutTheCompanyHtml: '',
+			employees: [],
 			payload: 'my-example-payload',
 			returnedPayloads: [],
 		};
@@ -69,5 +70,22 @@ export default {
 
 		<h1>History of the company</h1>
 		<article v-html='aboutTheCompanyHtml'></article>
+
+		<h2>Company employees</h2>
+		<div
+		v-for='employee in employees'
+		:key='employee.id'
+		>
+			<div>
+				<strong>{{ employee.name }}</strong>
+				({{ employee.id }})
+			</div>
+			<div>
+				<strong>{{ employee.title }}</strong>
+			</div>
+			<div>
+				{{ employee.description }}
+			</div>
+		</div>
 	</main>
 </template>
