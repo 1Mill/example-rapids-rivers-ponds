@@ -57,7 +57,7 @@ export default {
 
 			setTimeout(() => {
 				this.getCompanyEmployeeData();
-			}, 1000);
+			}, 3000);
 		},
 		getCompanyEmployeeData() {
 			publish({ type: 'company-employes.index.2020-06-18' })
