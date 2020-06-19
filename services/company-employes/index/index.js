@@ -6,7 +6,14 @@ subscribe({
 	eventType: KAFKA_EVENTTYPE,
 	handler: async ({ isEnriched }) => {
 		if (isEnriched) { return; }
-		return 'testing';
+		return [
+			{
+				description: 'I do the stuff with the things',
+				id: '1234',
+				name: 'Donald Smith',
+				title: 'Software engineer',
+			},
+		]
 	},
 	id: ID,
 	publishTo: [ process.env.RAPIDS_URL ],
