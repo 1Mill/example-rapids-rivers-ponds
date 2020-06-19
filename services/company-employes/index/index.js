@@ -28,6 +28,12 @@ const main = async () => {
 				name: 'Jane Doe',
 				title: 'Software engineer',
 			},
+			{
+				description: 'I am a project manager!',
+				id: '4321',
+				name: 'Guy Smith',
+				title: 'Project manager',
+			},
 		];
 		await collection.insertMany(records);
 
@@ -36,7 +42,7 @@ const main = async () => {
 				if (isEnriched) { return; }
 
 				const results = collection
-					.find({ title: 'Software engineer' })
+					.find({})
 					.toArray();
 				return results;
 			},
