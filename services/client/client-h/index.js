@@ -19,17 +19,24 @@ io.use(ioMiddlewareWildcard);
 
 subscribe({
 	eventType: KAFKA_EVENTTYPE,
-	handler: async ({ cloudevent, data, enrichment, isEnriched }) => {
+	handler: async ({
+		cloudevent,
+		data,
+		enrichment,
+		isEnriched,
+	}) => {
 		if (!isEnriched) { return; }
 
 		const { id, type } = cloudevent;
 		io.to(id).emit(type, enrichment);
 	},
 	id: 'client-subscriber-service',
-	subscribeTo: [ process.env.RAPIDS_URL ],
-	type: 'hello-world-2020-06-14',
+	subscribeTo: [process.env.RAPIDS_URL],
+	types: [
+		'get.company-about-us.2020-06-16',
+		'hello-world-2020-06-14',
+	],
 });
-
 
 io.on('connect', (socket) => {
 	socket.on('*', (packet) => {
