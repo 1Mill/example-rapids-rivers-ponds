@@ -1,8 +1,0 @@
-version: '3'
-
-services:
-  base:
-    build: .
-    image: 1mill/cloudevents-node-base
-    volumes:
-      - ./:/app

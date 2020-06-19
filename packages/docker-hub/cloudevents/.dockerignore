@@ -1,4 +1,0 @@
-.dockerignore
-/node_modules/
-Dockerfile
-docker-comopse.yml
