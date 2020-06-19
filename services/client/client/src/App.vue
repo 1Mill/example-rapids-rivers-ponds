@@ -44,6 +44,23 @@ export default {
 	},
 	methods: {
 		publish,
+		addNewEmployees() {
+			// Submit data
+			publish({
+				payloads: [ this.newEmployee ],
+				type: 'company-employes.create.2020-06-19',
+			})
+
+			// Add placeholder to UI
+			const placeholder = {
+				...this.newEmployee,
+				id: '- processing -',
+			};
+			this.employees.push(placeholder);
+
+			// Reset form
+			this.newEmployee = {};
+		},
 	},
 };
 </script>
@@ -88,10 +105,7 @@ export default {
 				{{ employee.description }}
 			</div>
 		</div>
-		<form @submit.prevent='publish({
-			payloads: [ newEmployee ],
-			type: "company-employes.create.2020-06-19",
-		})'>
+		<form @submit.prevent='addNewEmployees'>
 			<input type='text' v-model='newEmployee.name' />
 			<input type='text' v-model='newEmployee.title' />
 			<textarea v-model='newEmployee.description' />
