@@ -7,15 +7,16 @@ const { publish } = require('./publish');
 const { toEventType } = require('./toEventType');
 
 const subscribe = async ({
-	eventType,
 	handler,
 	id,
+	publishEventType,
 	publishTo,
+	subscribeEventType,
 	subscribeTo,
 	types,
 }) => {
 	// TODO: Support other event types (e.g. rabbitmq)
-	if (eventType !== KAFKA_EVENTTYPE) {
+	if (subscribeEventType !== KAFKA_EVENTTYPE) {
 		throw Error("Invalid event type");
 	}
 
@@ -41,11 +42,12 @@ const subscribe = async ({
 				// Normal flow
 				const cloudevent = fromEventType({
 					event,
-					eventType,
+					eventType: subscribeEventType,
 				});
 				// ? Should just pass in {...cloudevent} with
 				// ? Other properties ?
 				const enrichment = await handler({
+					...cloudevent,
 					cloudevent,
 					data: JSON.parse(cloudevent.data),
 					enrichment: isEnriched({ cloudevent })
@@ -66,9 +68,9 @@ const subscribe = async ({
 					publishTo,
 					event: toEventType({
 						cloudevent: enrichedCloudevent,
-						eventType,
+						eventType: publishEventType,
 					}),
-					eventType,
+					eventType: publishEventType,
 					id,
 				});
 			},
