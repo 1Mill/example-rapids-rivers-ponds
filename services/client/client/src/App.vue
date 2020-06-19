@@ -4,12 +4,13 @@ import { publish, subscribe } from './utilities/cloudevent';
 export default {
 	data() {
 		return {
-			aboutTheCompanyHtml: '<h1>testing</h1>',
+			aboutTheCompanyHtml: '',
 			payload: 'my-example-payload',
 			returnedPayloads: [],
 		};
 	},
 	created() {
+		// Get mesasge back from hello world service
 		subscribe({
 			handler: ({ payload }) => {
 				this.returnedPayloads.unshift(payload);
@@ -58,6 +59,6 @@ export default {
 		</ul>
 
 		<h1>History of the company</h1>
-		<div v-html='aboutTheCompanyHtml'></div>
+		<article v-html='aboutTheCompanyHtml'></article>
 	</main>
 </template>
