@@ -6,6 +6,7 @@ export default {
 		return {
 			aboutTheCompanyHtml: '',
 			employees: [],
+			newEmployee: {},
 			payload: 'my-example-payload',
 			returnedPayloads: [],
 		};
@@ -87,7 +88,13 @@ export default {
 				{{ employee.description }}
 			</div>
 		</div>
-		<form @submit.prevent='publish({ type: "company-employes.create.2020-06-19" })'>
+		<form @submit.prevent='publish({
+			payloads: [ newEmployee ],
+			type: "company-employes.create.2020-06-19",
+		})'>
+			<input type='text' v-model='newEmployee.name' />
+			<input type='text' v-model='newEmployee.title' />
+			<textarea v-model='newEmployee.description' />
 			<button>
 				Create new employee
 			</button>
