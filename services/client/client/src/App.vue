@@ -36,7 +36,7 @@ export default {
 		publish({ type: 'company-employes.index.2020-06-18' })
 		subscribe({
 			handler: ({ payload }) => {
-				console.log(payload)
+				this.employees = payload
 			},
 			type: 'company-employes.index.2020-06-18',
 		})
