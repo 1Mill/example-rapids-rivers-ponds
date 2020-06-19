@@ -11,32 +11,6 @@ const main = async () => {
 		const db = client.db(process.env.DATABASE_NAME);
 		const collection = db.collection('employees');
 
-		// Remove all records from database
-		collection.deleteMany({});
-
-		// Seed database
-		const records = [
-			{
-				description: 'I do the stuff with the things',
-				id: '1234',
-				name: 'John Doe',
-				title: 'Software engineer',
-			},
-			{
-				description: 'I do the stuff with the things',
-				id: '1233',
-				name: 'Jane Doe',
-				title: 'Software engineer',
-			},
-			{
-				description: 'I am a project manager!',
-				id: '4321',
-				name: 'Guy Smith',
-				title: 'Project manager',
-			},
-		];
-		await collection.insertMany(records);
-
 		subscribe({
 			handler: async ({ isEnriched }) => {
 				if (isEnriched) { return; }
