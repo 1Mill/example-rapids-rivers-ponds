@@ -3,6 +3,8 @@ version: '3.8'
 services:
   index:
     build: ./index
+    depends_on:
+      - database
     environment:
       NODE_ENV: development
       RAPIDS_URL: rapids:9092
@@ -11,6 +13,20 @@ services:
     volumes:
       - ./index:/app
 
+  database:
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_DATABASE: development
+      MONGO_INITDB_ROOT_PASSWORD: placeholder-password
+      MONGO_INITDB_ROOT_USERNAME: root
+    networks:
+      - services-network
+    volumes:
+      - database-data:/data/db
+
 networks:
   services-network:
     name: services-network
+
+volumes:
+  database-data: {}
