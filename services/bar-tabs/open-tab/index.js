@@ -32,13 +32,9 @@ const main = async () => {
 				};
 				console.log(tab);
 
-				const query = {
-					rowMode: 'array',
-					text: 'SELECT $1::text as name',
-					values: [ 'my-name' ],
-				};
-				const { rows } = await client.query(query);
+				const { rows } = await client.query('SELECT table_number, waiter FROM tabs');
 				console.log(rows);
+				console.log('event fired');
 			},
 			id: "services.open-tab",
 			publishEventType: KAFKA_EVENTTYPE,
