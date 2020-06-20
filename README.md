@@ -18,7 +18,9 @@
 * A food item has a price
 * When a party member adds a drink item to the tab, then the cost of the tab increments by the price of the drink item
 * A drink item has a price
-* When a party pays the tab bill, then the tab becomes closed.
+* When the bill is paid, then the tab becomes closed
+* A bill has a cost total
+* A bill has a tab id
 * When a tab is closed, then no more food or drink items may be added to the tab.
 
 ## References
