@@ -22,9 +22,9 @@ const main = async () => {
 				// };
 				// console.log(tab);
 
-				// const { rows } = await client.query('SELECT table_number, waiter FROM tabs');
-				// console.log(rows);
 				console.log('event fired');
+				const results = await query({ text: 'SELECT table_number, waiter FROM tabs' });
+				console.log(results);
 			},
 			id: 'services.open-tab',
 			publishEventType: KAFKA_EVENTTYPE,
