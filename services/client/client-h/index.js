@@ -8,6 +8,8 @@ const {
 	toEventType,
 } = require('@1mill/cloudevents');
 
+const ID = 'services.client-h';
+
 const server = require('http').createServer();
 const io = require('socket.io')(server);
 
@@ -18,22 +20,14 @@ io.adapter(redisAdapter({
 io.use(ioMiddlewareWildcard);
 
 subscribe({
-	eventType: KAFKA_EVENTTYPE,
-	handler: async ({
-		cloudevent,
-		data,
-		enrichment,
-		isEnriched,
-	}) => {
+	handler: async ({ id, isEnriched, type }) => {
 		if (!isEnriched) { return; }
-
-		const { id, type } = cloudevent;
 		io.to(id).emit(type, enrichment);
 	},
-	id: 'client-subscriber-service',
+	id: ID,
+	subscribeEventType: KAFKA_EVENTTYPE,
 	subscribeTo: [process.env.RAPIDS_URL],
-	types: [
-	],
+	types: [],
 });
 
 io.on('connect', (socket) => {
@@ -54,7 +48,7 @@ io.on('connect', (socket) => {
 						eventType: KAFKA_EVENTTYPE,
 					}),
 					eventType: KAFKA_EVENTTYPE,
-					id: 'client-producer-service',
+					id: ID,
 				});
 			});
 		} catch (err) {
@@ -62,7 +56,6 @@ io.on('connect', (socket) => {
 		}
 	});
 });
-
 
 server.listen(process.env.PORT, () => {
 	console.log(`Listening on ${process.env.HOST}:${process.env.PORT}`);
