@@ -9,24 +9,41 @@ const client = new Client({
 	user: process.env.DATABASE_USERNAME,
 });
 
-subscribe({
-	handler: async ({ data }) => {
-		const {
-			tableNumber = null,
-			waiter = null,
-		} = data;
-		const tab = {
-			id: Math.ceil(Math.random() * 100000),
-			tableNumber,
-			waiter,
-		};
-		console.log(client);
-		console.log(tab);
-	},
-	id: 'services.open-tab',
-	publishEventType: KAFKA_EVENTTYPE,
-	publishTo: [ process.env.RAPIDS_URL ],
-	subscribeEventType: KAFKA_EVENTTYPE,
-	subscribeTo: [ process.env.RAPIDS_URL ],
-	types: [ 'open-tab.2020-06-20' ],
-});
+const main = async () => {
+	try {
+		await client.connect();
+
+		subscribe({
+			handler: async ({ data }) => {
+				const {
+					tableNumber = null,
+					waiter = null,
+				} = data;
+				const tab = {
+					id: Math.ceil(Math.random() * 100000),
+					tableNumber,
+					waiter,
+				};
+				console.log(tab);
+
+				const query = {
+					rowMode: 'array',
+					text: 'SELECT $1::text as name',
+					values: [ 'my-name' ],
+				};
+				const { rows } = await client.query(query);
+				console.log(rows);
+			},
+			id: "services.open-tab",
+			publishEventType: KAFKA_EVENTTYPE,
+			publishTo: [process.env.RAPIDS_URL],
+			subscribeEventType: KAFKA_EVENTTYPE,
+			subscribeTo: [process.env.RAPIDS_URL],
+			types: ["open-tab.2020-06-20"],
+		});
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+main();
