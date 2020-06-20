@@ -1,17 +1,22 @@
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 
 subscribe({
-	handler: async ({ data, isEnriched }) => {
-		if (isEnriched) { return; }
-
-		const enrichmentValue = data.split('').reverse().join('')
-		console.log(`Turn "${data}" into "${enrichmentValue}"`);
-		return enrichmentValue;
+	handler: async ({ data }) => {
+		const {
+			tableNumber = null,
+			waiter = null,
+		} = data;
+		const tab = {
+			id: Math.ceil(Math.random() * 100000),
+			tableNumber,
+			waiter,
+		};
+		console.log(tab);
 	},
-	id: 'services.hello-world',
+	id: 'services.open-tab',
 	publishEventType: KAFKA_EVENTTYPE,
 	publishTo: [ process.env.RAPIDS_URL ],
 	subscribeEventType: KAFKA_EVENTTYPE,
 	subscribeTo: [ process.env.RAPIDS_URL ],
-	types: [ 'hello-world.2020-06-19' ],
+	types: [ 'open-tab.2020-06-20' ],
 });
