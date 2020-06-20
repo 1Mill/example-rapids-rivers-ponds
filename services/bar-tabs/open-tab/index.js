@@ -5,7 +5,7 @@ const main = async () => {
 	try {
 		// Seed database on startup
 		await query({
-			query: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
+			text: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
 			values: ['4321', 'Some name'],
 		});
 
