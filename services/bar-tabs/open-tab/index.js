@@ -11,20 +11,15 @@ const main = async () => {
 
 		subscribe({
 			handler: async ({ data }) => {
-				// const {
-				// 	tableNumber = null,
-				// 	waiter = null,
-				// } = data;
-				// const tab = {
-				// 	id: Math.ceil(Math.random() * 100000),
-				// 	tableNumber,
-				// 	waiter,
-				// };
-				// console.log(tab);
-
-				console.log('event fired');
-				const results = await query({ text: 'SELECT table_number, waiter FROM tabs' });
-				console.log(results);
+				const {
+					tableNumber,
+					waiter,
+				} = data;
+				const res = await query({
+					text: 'INSERT INTO tabs(table_number, waiter) VALUES($1,$2) RETURNING *',
+					values: [ tableNumber, waiter ],
+				});
+				console.log('tab: ', res);
 			},
 			id: 'services.open-tab',
 			publishEventType: KAFKA_EVENTTYPE,
