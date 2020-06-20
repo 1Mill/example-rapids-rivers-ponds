@@ -1,39 +1,29 @@
-const { Client } = require('pg');
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
-
-const client = new Client({
-	database: process.env.DATABASE_NAME,
-	host: process.env.DATABASE_HOST,
-	password: process.env.DATABASE_PASSWORD,
-	port: process.env.DATABASE_PORT,
-	user: process.env.DATABASE_USERNAME,
-});
+const { query } = require('./utilities/database/query');
 
 const main = async () => {
 	try {
-		await client.connect();
-
-		const insert = {
-			text: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
-			values: ['1234', 'Erik'],
-		};
-		await client.query(insert);
+		// Seed database on startup
+		await query({
+			query: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
+			values: ['4321', 'Some name'],
+		});
 
 		subscribe({
 			handler: async ({ data }) => {
-				const {
-					tableNumber = null,
-					waiter = null,
-				} = data;
-				const tab = {
-					id: Math.ceil(Math.random() * 100000),
-					tableNumber,
-					waiter,
-				};
-				console.log(tab);
+				// const {
+				// 	tableNumber = null,
+				// 	waiter = null,
+				// } = data;
+				// const tab = {
+				// 	id: Math.ceil(Math.random() * 100000),
+				// 	tableNumber,
+				// 	waiter,
+				// };
+				// console.log(tab);
 
-				const { rows } = await client.query('SELECT table_number, waiter FROM tabs');
-				console.log(rows);
+				// const { rows } = await client.query('SELECT table_number, waiter FROM tabs');
+				// console.log(rows);
 				console.log('event fired');
 			},
 			id: 'services.open-tab',
