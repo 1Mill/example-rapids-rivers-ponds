@@ -33,7 +33,7 @@ subscribe({
 io.on('connect', (socket) => {
 	socket.on('*', (packet) => {
 		try {
-			const [{ type, payloads }] = packet.data;
+			const [{ type, payloads = [{}] }] = packet.data;
 			payloads.forEach(payload => {
 				const cloudevent = create({
 					data: payload,
