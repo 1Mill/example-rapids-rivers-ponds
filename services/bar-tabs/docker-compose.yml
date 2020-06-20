@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  open-tab:
+    build: ./open-tab
+    environment:
+      NODE_ENV: development
+      RAPIDS_URL: rapids:9092
+    networks:
+      - services-network
+    volumes:
+      - ./open-tab:/app
+
+networks:
+  services-network:
+    name: services-network
