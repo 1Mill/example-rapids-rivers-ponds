@@ -13,6 +13,12 @@ const main = async () => {
 	try {
 		await client.connect();
 
+		const insert = {
+			text: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
+			values: ["1234", "Erik"],
+		};
+		await client.query(insert);
+
 		subscribe({
 			handler: async ({ data }) => {
 				const {
