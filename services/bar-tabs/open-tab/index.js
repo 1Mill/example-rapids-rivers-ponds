@@ -1,4 +1,12 @@
+const { Client } = require('pg');
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
+
+const client = new Client({
+	host: process.env.DATABASE_HOST,
+	password: process.env.DATABASE_PASSWORD,
+	port: process.env.DATABASE_PORT,
+	user: process.env.DATABASE_USERNAME,
+});
 
 subscribe({
 	handler: async ({ data }) => {
@@ -11,6 +19,7 @@ subscribe({
 			tableNumber,
 			waiter,
 		};
+		console.log(client);
 		console.log(tab);
 	},
 	id: 'services.open-tab',
