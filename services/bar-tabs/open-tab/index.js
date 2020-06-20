@@ -2,6 +2,7 @@ const { Client } = require('pg');
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 
 const client = new Client({
+	database: process.env.DATABASE_NAME,
 	host: process.env.DATABASE_HOST,
 	password: process.env.DATABASE_PASSWORD,
 	port: process.env.DATABASE_PORT,
