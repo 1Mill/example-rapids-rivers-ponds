@@ -15,7 +15,7 @@ const main = async () => {
 
 		const insert = {
 			text: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
-			values: ["1234", "Erik"],
+			values: ['1234', 'Erik'],
 		};
 		await client.query(insert);
 
@@ -36,12 +36,12 @@ const main = async () => {
 				console.log(rows);
 				console.log('event fired');
 			},
-			id: "services.open-tab",
+			id: 'services.open-tab',
 			publishEventType: KAFKA_EVENTTYPE,
 			publishTo: [process.env.RAPIDS_URL],
 			subscribeEventType: KAFKA_EVENTTYPE,
 			subscribeTo: [process.env.RAPIDS_URL],
-			types: ["open-tab.2020-06-20"],
+			types: ['open-tab.2020-06-20'],
 		});
 	} catch (err) {
 		console.error(err);
