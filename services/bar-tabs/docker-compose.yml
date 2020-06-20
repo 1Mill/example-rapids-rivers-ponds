@@ -12,6 +12,15 @@ services:
     volumes:
       - database-data:/var/lib/postgresql/data
 
+  database-migrations:
+    build: ./database-migrations
+    environment:
+      DATABASE_URL: postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@database:5432/${DATABASE_NAME}
+    networks:
+      - services-network
+    volumes:
+      - ./database-migrations:/app
+
   open-tab:
     build: ./open-tab
     depends_on:
