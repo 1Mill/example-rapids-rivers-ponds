@@ -10,7 +10,7 @@ exports.up = pgm => {
 			notNull: true,
 			type: 'timestamp',
 		},
-		tableName: {
+		tableNumber: {
 			notNull: false,
 			type: 'text',
 		},
