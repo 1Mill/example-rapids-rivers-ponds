@@ -5,12 +5,7 @@ exports.shorthands = undefined;
 exports.up = pgm => {
 	pgm.createTable('tabs', {
 		id: 'id',
-		createdAt: {
-			default: pgm.func('current_timestamp'),
-			notNull: true,
-			type: 'timestamp',
-		},
-		tableNumber: {
+		table_number: {
 			notNull: false,
 			type: 'text',
 		},
