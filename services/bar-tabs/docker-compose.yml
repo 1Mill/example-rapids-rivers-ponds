@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  add-menu-item:
+    build: ./add-menu-item
+    depends_on:
+      - database
+      - database-migrations
+    environment:
+      DATABASE_HOST: database
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      NODE_ENV: development
+      RAPIDS_URL: rapids:9092
+    networks:
+      - services-network
+    volumes:
+      - ./add-menu-item:/app
+
   database:
     image: postgres:11-alpine
     environment:
@@ -27,6 +45,7 @@ services:
     build: ./open-tab
     depends_on:
       - database
+      - database-migrations
     environment:
       DATABASE_HOST: database
       DATABASE_NAME: ${DATABASE_NAME}
