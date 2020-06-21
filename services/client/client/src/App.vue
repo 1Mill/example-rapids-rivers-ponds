@@ -13,9 +13,9 @@ export default {
 		publish({ type: 'list-menu-items.2020-21-06' });
 		subscribe({
 			handler: ({ payload }) => {
-				this.menuItems = payload.map(menuItem => ({
-					name: menuItem.name.replace('-', ' '),
-					price: `$${menuItem.priceUSD}`,
+				this.menuItems = payload.map(({ name, priceUSD }) => ({
+					name: name.replace('-', ' '),
+					price: `$${priceUSD}`,
 				}));
 			},
 			type: 'list-menu-items.2020-21-06',
