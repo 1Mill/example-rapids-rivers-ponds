@@ -3,12 +3,6 @@ const { query } = require('./utilities/database/query');
 
 const main = async () => {
 	try {
-		// Seed database on startup
-		await query({
-			text: 'INSERT INTO tabs(table_number, waiter) VALUES($1, $2) RETURNING *',
-			values: ['4321', 'Some name'],
-		});
-
 		subscribe({
 			handler: async ({ data }) => {
 				const {
