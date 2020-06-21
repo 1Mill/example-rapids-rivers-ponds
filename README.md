@@ -4,10 +4,10 @@
 
 ### Must have
 
-* A bill has a tab id
+* ~~A bill has a tab id~~
 * A drink item has a price
 * A food item has a price
-* When a party goes to the bar, they may open a party tab.
+* ~~When a party goes to the bar, they may open a party tab.~~
 
 ### Should have
 
