@@ -8,8 +8,7 @@ subscribe({
 		const results = await query({
 			text: 'SELECT * from tabs'
 		});
-		console.log(results)
-
+		console.log(results);
 		console.log('adding item')
 	},
 	id: 'services.bar-tabs.add-menu-item',
