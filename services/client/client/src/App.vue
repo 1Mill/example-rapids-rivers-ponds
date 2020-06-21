@@ -11,7 +11,8 @@ export default {
 		subscribe({
 			handler: ({ payload }) => {
 				this.menuItems = payload.map(({ name, priceUSD }) => ({
-					name: name.replace('-', ' '),
+					displayName: name.replace('-', ' '),
+					name,
 					price: `$${priceUSD}`,
 				}));
 			},
@@ -33,7 +34,7 @@ export default {
 			v-for='menuItem in menuItems'
 			:key='menuItem.name'
 			>
-				{{ menuItem.name }}
+				{{ menuItem.displayName }}
 				({{ menuItem.price }})
 			</li>
 		</ul>
