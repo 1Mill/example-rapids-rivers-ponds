@@ -12,7 +12,12 @@ export default {
 
 		publish({ type: 'list-menu-items.2020-21-06' });
 		subscribe({
-			handler: ({ payload }) => { this.menuItems = payload; },
+			handler: ({ payload }) => {
+				this.menuItems = payload.map(menuItem => ({
+					name: menuItem.name.replace('-', ' '),
+					price: `$${menuItem.priceUSD}`,
+				}));
+			},
 			type: 'list-menu-items.2020-21-06',
 		});
 	},
@@ -29,6 +34,7 @@ export default {
 			:key='menuItem.name'
 			>
 				{{ menuItem.name }}
+				({{ menuItem.price }})
 			</li>
 		</ul>
 	</main>
