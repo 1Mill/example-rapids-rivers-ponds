@@ -22,7 +22,6 @@
 * When a tab is closed, then no more food or drink items may be added to the tab.
 * When the bill is paid, then the tab becomes closed
 
-
 ### Won't have
 
 * A party may be composd of one or more people.
