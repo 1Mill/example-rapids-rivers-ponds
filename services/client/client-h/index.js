@@ -20,7 +20,7 @@ io.adapter(redisAdapter({
 io.use(ioMiddlewareWildcard);
 
 subscribe({
-	handler: async ({ id, isEnriched, type }) => {
+	handler: async ({ enrichment, id, isEnriched, type }) => {
 		if (!isEnriched) { return; }
 		io.to(id).emit(type, enrichment);
 	},
