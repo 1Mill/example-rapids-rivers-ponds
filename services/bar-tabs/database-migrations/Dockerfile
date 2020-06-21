@@ -12,4 +12,4 @@ COPY . .
 
 ENV DATABASE_URL=${DATABASE_URL}
 
-CMD [ "npm", "run", "migrate:up" ]
+CMD [ "npm", "run", "start" ]

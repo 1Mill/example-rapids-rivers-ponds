@@ -6,6 +6,7 @@
     "migrate": "node-pg-migrate",
     "migrate:rollback": "npm run migrate down",
     "migrate:up": "npm run migrate up",
+    "start": "npm run migrate:up",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
