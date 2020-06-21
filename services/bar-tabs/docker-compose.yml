@@ -7,7 +7,11 @@ services:
       - database
       - database-migrations
     environment:
-      DATABASE_URL: postgres://${DATABASE_USERNAME}:${DATABASE_PASSWORD}@database:5432/${DATABASE_NAME}
+      DATABASE_HOST: database
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
       NODE_ENV: development
       RAPIDS_URL: rapids:9092
     networks:

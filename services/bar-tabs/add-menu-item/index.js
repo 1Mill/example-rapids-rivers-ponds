@@ -1,8 +1,15 @@
 const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
+const { query } = require('./utilities/database/query');
 
 subscribe({
 	handler: async ({ isEnriched }) => {
 		if (isEnriched) { return; }
+
+		const results = query({
+			text: 'SELECT * from tabs'
+		});
+		console.log(results)
+
 		console.log('adding item')
 	},
 	id: 'services.bar-tabs.add-menu-item',
