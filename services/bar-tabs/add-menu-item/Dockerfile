@@ -11,6 +11,7 @@ RUN npm install
 COPY . .
 
 ENV \
+	DATABASE_URL=${DATABASE_URL} \
 	HOST=0.0.0.0 \
 	PORT=8080 \
 	RAPIDS_URL=${RAPIDS_URL}
