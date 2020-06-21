@@ -1,9 +1,20 @@
 <script>
-import { publish } from './utilities/cloudevent';
+import { publish, subscribe } from './utilities/cloudevent';
 
 export default {
+	data() {
+		return {
+			menuItems: [],
+		};
+	},
 	created() {
 		publish({ type: 'open-tab.2020-06-20' });
+
+		publish({ type: 'list-menu-items.2020-21-06' });
+		subscribe({
+			handler: ({ payload }) => { this.menuItems = payload; },
+			type: 'list-menu-items.2020-21-06',
+		});
 	},
 };
 </script>
@@ -11,5 +22,14 @@ export default {
 <template>
 	<main>
 		<h1>Hello world</h1>
+		<h2>Menu</h2>
+		<ul>
+			<li
+			v-for='menuItem in menuItems'
+			:key='menuItem.name'
+			>
+				{{ menuItem.name }}
+			</li>
+		</ul>
 	</main>
 </template>
