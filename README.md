@@ -14,6 +14,7 @@
 * A bill has a cost total
 * A member of the party may add drink items to the tab.
 * A member of the party may add food items to the tab.
+* An employee may close a party's tab.
 
 ### Could have
 
