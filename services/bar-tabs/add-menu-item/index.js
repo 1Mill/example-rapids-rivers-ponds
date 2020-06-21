@@ -5,7 +5,7 @@ subscribe({
 	handler: async ({ isEnriched }) => {
 		if (isEnriched) { return; }
 
-		const results = query({
+		const results = await query({
 			text: 'SELECT * from tabs'
 		});
 		console.log(results)
