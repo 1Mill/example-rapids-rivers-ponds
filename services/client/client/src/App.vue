@@ -8,9 +8,6 @@ export default {
 		};
 	},
 	created() {
-		publish({ type: 'open-tab.2020-06-20' });
-
-		publish({ type: 'list-menu-items.2020-21-06' });
 		subscribe({
 			handler: ({ payload }) => {
 				this.menuItems = payload.map(({ name, priceUSD }) => ({
@@ -20,6 +17,9 @@ export default {
 			},
 			type: 'list-menu-items.2020-21-06',
 		});
+
+		publish({ type: 'list-menu-items.2020-21-06' });
+		publish({ type: 'open-tab.2020-06-20' });
 	},
 };
 </script>
