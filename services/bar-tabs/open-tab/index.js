@@ -15,11 +15,10 @@ const main = async () => {
 					tableNumber,
 					waiter,
 				} = data;
-				const res = await query({
-					text: 'INSERT INTO tabs(table_number, waiter) VALUES($1,$2) RETURNING *',
+				await query({
+					text: 'INSERT INTO tabs(table_number, waiter) VALUES($1,$2)',
 					values: [ tableNumber, waiter ],
 				});
-				console.log('tab: ', res);
 			},
 			id: 'services.open-tab',
 			publishEventType: KAFKA_EVENTTYPE,
