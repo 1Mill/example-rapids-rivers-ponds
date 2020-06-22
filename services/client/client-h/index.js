@@ -31,7 +31,10 @@ subscribe({
 	id: ID,
 	subscribeEventType: KAFKA_EVENTTYPE,
 	subscribeTo: [process.env.RAPIDS_URL],
-	types: ['list-menu-items.2020-21-06'],
+	types: [
+		'list-menu-items.2020-21-06',
+		'open-tab.2020-06-21',
+	],
 });
 
 io.on('connect', (socket) => {
