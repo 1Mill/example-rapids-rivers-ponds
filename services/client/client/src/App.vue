@@ -5,6 +5,7 @@ export default {
 	data() {
 		return {
 			menuItems: [],
+			tabId: null,
 		};
 	},
 	created() {
@@ -18,6 +19,13 @@ export default {
 			},
 			type: 'list-menu-items.2020-21-06',
 		});
+		subscribe({
+			handler: ({ payload }) => {
+				console.log('testing');
+				this.tabId = payload;
+			},
+			type: 'open-tab.2020-06-21',
+		});
 
 		publish({ type: 'list-menu-items.2020-21-06' });
 		publish({ type: 'open-tab.2020-06-21' });
@@ -27,7 +35,7 @@ export default {
 
 <template>
 	<main>
-		<h1>Hello world</h1>
+		<h1>Tab: #{{ tabId }}</h1>
 		<h2>Menu</h2>
 		<ul>
 			<li
