@@ -4,6 +4,9 @@ services:
   root:
     build: ./root
     environment:
+      DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_TABLE: ${DATABASE_TABLE}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
       NODE_ENV: development
       RAPIDS_URL: rapids:9092
     networks:
@@ -11,6 +14,20 @@ services:
     volumes:
       - ./root:/app
 
+  database:
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_DATABASE: ${DATABASE_TABLE}
+      MONGO_INITDB_ROOT_PASSWORD: ${DATABASE_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: ${DATABASE_USERNAME}
+    networks:
+      - services-network
+    volumes:
+      - database-data:/data/db
+
 networks:
   services-network:
     name: services-network
+
+volumes:
+  database-data: {}
