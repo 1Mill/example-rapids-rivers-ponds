@@ -4,7 +4,9 @@ services:
   root:
     build: ./root
     environment:
+      DATABASE_HOST: database
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
+      DATABASE_PORT: 27017
       DATABASE_TABLE: ${DATABASE_TABLE}
       DATABASE_USERNAME: ${DATABASE_USERNAME}
       NODE_ENV: development
