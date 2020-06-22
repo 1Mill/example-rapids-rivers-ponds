@@ -3,6 +3,8 @@ version: '3.8'
 services:
   root:
     build: ./root
+    depends_on:
+      - database
     environment:
       DATABASE_HOST: database
       DATABASE_PASSWORD: ${DATABASE_PASSWORD}
