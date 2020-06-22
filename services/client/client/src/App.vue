@@ -20,16 +20,7 @@ export default {
 		});
 
 		publish({ type: 'list-menu-items.2020-21-06' });
-		publish({ type: 'open-tab.2020-06-20' });
-	},
-	methods: {
-		addMenuItems({ menuItem }) {
-			const { name } = menuItem;
-			publish({
-				payloads: [{ name }],
-				type: 'add-menu-item.2020-21-06',
-			});
-		},
+		publish({ type: 'open-tab.2020-06-21' });
 	},
 };
 </script>
