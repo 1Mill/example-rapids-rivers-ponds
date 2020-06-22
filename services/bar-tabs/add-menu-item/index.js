@@ -2,8 +2,17 @@ const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 const { query } = require('./utilities/database/query');
 
 subscribe({
-	handler: async ({ isEnriched }) => {
+	handler: async ({ data, isEnriched }) => {
 		if (isEnriched) { return; }
+
+		const {
+			menuItemName,
+			tabId,
+		} = data;
+		await query({
+			text: 'UPDATE tabs SET table_number = $1 WHERE id = $2',
+			values: ['testing', 51],
+		})
 
 		const results = await query({
 			text: 'SELECT * from tabs'
