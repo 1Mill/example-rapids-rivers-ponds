@@ -10,12 +10,13 @@ subscribe({
 			tabId,
 		} = data;
 		await query({
-			text: 'UPDATE tabs SET table_number = $1 WHERE id = $2',
+			text: 'UPDATE tabs SET menu_items = ARRAY[$1] WHERE id = $2',
 			values: ['testing', 51],
 		})
 
 		const results = await query({
-			text: 'SELECT * from tabs'
+			text: 'SELECT * from tabs WHERE id = $1',
+			values: [51]
 		});
 		console.log(results);
 		console.log('adding item')
