@@ -21,8 +21,12 @@ io.use(ioMiddlewareWildcard);
 
 subscribe({
 	handler: async ({ enrichment, id, isEnriched, type }) => {
-		if (!isEnriched) { return; }
-		io.to(id).emit(type, enrichment);
+		try {
+			if (!isEnriched) { return; }
+			io.to(id).emit(type, enrichment);
+		} catch (err) {
+			console.error(err);
+		}
 	},
 	id: ID,
 	subscribeEventType: KAFKA_EVENTTYPE,
