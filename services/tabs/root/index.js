@@ -2,8 +2,12 @@ const { KAFKA_EVENTTYPE, subscribe } = require('@1mill/cloudevents');
 
 subscribe({
 	handler: async ({ isEnriched }) => {
-		if (isEnriched) { return; }
-		console.log('testing');
+		try {
+			if (isEnriched) { return; }
+			console.log('testing');
+		} catch (err) {
+			console.error(err);
+		}
 	},
 	id: 'services.tabs.root',
 	publishEventType: KAFKA_EVENTTYPE,
