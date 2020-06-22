@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  root:
+    build: ./root
+    environment:
+      NODE_ENV: development
+      RAPIDS_URL: rapids:9092
+    networks:
+      - services-network
+    volumes:
+      - ./root:/app
+
+networks:
+  services-network:
+    name: services-network
