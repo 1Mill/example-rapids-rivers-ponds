@@ -4,7 +4,7 @@ subscribe({
 	handler: async ({ isEnriched }) => {
 		try {
 			if (isEnriched) { return; }
-			console.log('testing');
+			return 'testing';
 		} catch (err) {
 			console.error(err);
 		}
