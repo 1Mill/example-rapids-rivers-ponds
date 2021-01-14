@@ -2,7 +2,7 @@
 
 CONFIG_FILENAME=local.config
 DIRECTORIES=$(
-	find . \
+	find ${1-.} \
 	-name "$CONFIG_FILENAME" \
 	-not -path "*node_modules*" \
 	-not -path "*nuxt*" \
