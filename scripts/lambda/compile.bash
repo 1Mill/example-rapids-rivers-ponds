@@ -1,5 +1,6 @@
 #!/bin/bash
 
+AWS_ENDPOINT=http://localhost:4566/
 CONFIG_FILENAME=local.config
 DIRECTORIES=$(
 	find ${1-.} \
@@ -15,7 +16,6 @@ do
 	AWS_ENDPOINT=http://localhost:4566/
 	FUNCTIONNAME=
 	HANDLER=
-	HOST_ABSOLUTEPATH=/$(cd -- $directory && pwd)
 	RUNTIME=
 	TYPE=
 
@@ -29,6 +29,20 @@ do
 	fi
 
 	# * Compile lambda in a clean environment
-	docker-compose -f $(dirname $BASH_SOURCE)/compile.docker-compose.yml down --volumes
+	DIR=$(pwd)/$dir docker-compose -f $(dirname $BASH_SOURCE)/compile.docker-compose.yml down --volumes
 	DIR=$(pwd)/$dir docker-compose -f $(dirname $BASH_SOURCE)/compile.docker-compose.yml up $RUNTIME
+
+	# * Delete lambda function if it already exists in local AWS
+	aws --endpoint-url $AWS_ENDPOINT \
+		lambda delete-function \
+			--function-name $FUNCTIONNAME
+
+	# * Create lambda function in local AWS
+	aws --endpoint-url $AWS_ENDPOINT \
+		lambda create-function \
+			--code S3Bucket="__local__",S3Key="$(pwd)/$dir" \
+			--function-name $FUNCTIONNAME \
+			--handler $HANDLER \
+			--role just-has-to-exist \
+			--runtime $RUNTIME
 done
