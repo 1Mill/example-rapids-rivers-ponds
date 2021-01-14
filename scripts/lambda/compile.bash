@@ -28,6 +28,7 @@ do
 		continue
 	fi
 
-	# * Compile lambda
+	# * Compile lambda in a clean environment
+	docker-compose -f $(dirname $BASH_SOURCE)/compile.docker-compose.yml down --volumes
 	DIR=$(pwd)/$dir docker-compose -f $(dirname $BASH_SOURCE)/compile.docker-compose.yml up $RUNTIME
 done
