@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  nodejs12.x:
+    image: node:12-alpine
+    command: sh -c '[[ -f "package.json" ]] && npm install || echo No package.json found'
+    volumes:
+      - $DIR:/app
+    working_dir: /app
