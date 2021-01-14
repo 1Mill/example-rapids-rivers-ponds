@@ -1,5 +1,5 @@
 #!/bin/bash
 
-CORE_SERVICES=(
+SERVICES=(
 	"/services/aws"
 )
