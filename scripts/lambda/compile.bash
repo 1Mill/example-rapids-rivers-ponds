@@ -13,7 +13,6 @@ DIRECTORIES=$(
 for dir in $DIRECTORIES
 do
 	# * Reset / configure vars for lambda functions
-	AWS_ENDPOINT=http://localhost:4566/
 	FUNCTIONNAME=
 	HANDLER=
 	RUNTIME=
