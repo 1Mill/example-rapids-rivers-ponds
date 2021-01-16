@@ -1,5 +1,8 @@
 # General
 .env
 
+# Lambda
+local.lambda.output.json
+
 # Node
 node_modules
