@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  rapids-to-river-hydrator:
+    image: ghcr.io/click-flow/docker-images/lambda-hydrator:v2-alpine
+    environment:
+      AWS_ACCESS_KEY_ID: my-aws-id
+      AWS_REGION: us-east-1
+      AWS_SECRET_ACCESS_KEY: my-aws-key
+      MAPS_JSON: '[
+        {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "service-able-rapidstoriverhydratorlambda"},
+      ]'
+      CLOUDEVENTS_PROTOCOL: kafka
+      CLOUDEVENTS_URLS: river:9092
+      NODE_ENV: development
+
+  river-to-lambda-hydrator:
+    image: ghcr.io/click-flow/docker-images/lambda-hydrator:v2-alpine
+    environment:
+      AWS_ACCESS_KEY_ID: my-aws-id
+      AWS_REGION: us-east-1
+      AWS_SECRET_ACCESS_KEY: my-aws-key
+      MAPS_JSON: '[
+        {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "service-able-helloworld"},
+      ]'
+      CLOUDEVENTS_PROTOCOL: kafka
+      CLOUDEVENTS_URLS: river:9092
+      NODE_ENV: development
+
+networks:
+  default:
+    external:
+      name: services-network
