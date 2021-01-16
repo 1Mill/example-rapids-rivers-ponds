@@ -1,11 +1,11 @@
 const { v4: { createCloudevent, createEventStream } } = require('@1mill/cloudevents')
 
-const rapids = createEventStream({
+const river = createEventStream({
 	id: process.env.CLOUDEVENT_ID,
 	mechanism: process.env.CLOUDEVENT_MECHANISM,
 	password: process.env.CLOUDEVENT_PASSWORD,
 	protocol: process.env.CLOUDEVENT_PROTOCOL,
-	urls: process.env.CLOUDEVENT_URLS,
+	urls: process.env.CLOUDEVENT_URLS.split(','),
 	username: process.env.CLOUDEVENT_USERNAME,
 })
 const perform = async ({ cloudevent }) => {
@@ -13,11 +13,12 @@ const perform = async ({ cloudevent }) => {
 
 	const enrichment = message.split('').reverse().join('')
 
-	rapids.emit({
+	await river.emit({
 		cloudevent: createCloudevent({
 			...cloudevent,
 			data: JSON.stringify(enrichment),
 			datacontenttype: 'application/json',
+			id: 'todo',
 			source: process.env.CLOUDEVENT_ID,
 			type: 'todo.0.e',
 		})

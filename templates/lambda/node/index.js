@@ -5,7 +5,7 @@ const rapids = createEventStream({
 	mechanism: process.env.CLOUDEVENT_MECHANISM,
 	password: process.env.CLOUDEVENT_PASSWORD,
 	protocol: process.env.CLOUDEVENT_PROTOCOL,
-	urls: process.env.CLOUDEVENT_URLS,
+	urls: process.env.CLOUDEVENT_URLS.split(','),
 	username: process.env.CLOUDEVENT_USERNAME,
 })
 const perform = async ({ cloudevent }) => {
@@ -18,6 +18,7 @@ const perform = async ({ cloudevent }) => {
 			...cloudevent,
 			data: JSON.stringify(enrichment),
 			datacontenttype: 'application/json',
+			id: 'todo',
 			source: process.env.CLOUDEVENT_ID,
 			type: 'todo.0.e',
 		})
