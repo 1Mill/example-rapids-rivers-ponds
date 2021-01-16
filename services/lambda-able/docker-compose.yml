@@ -8,7 +8,7 @@ services:
       AWS_REGION: us-east-1
       AWS_SECRET_ACCESS_KEY: my-aws-key
       MAPS_JSON: '[
-        {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "service-able-rapidstoriverhydratorlambda"},
+        {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "services-lambdaable-rapidstoriverhydratorlambda"},
       ]'
       CLOUDEVENTS_PROTOCOL: kafka
       CLOUDEVENTS_URLS: rapids:9092,rapids:9092,rapids:9092
