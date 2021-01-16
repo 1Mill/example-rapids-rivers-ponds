@@ -11,7 +11,7 @@ services:
         {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "service-able-rapidstoriverhydratorlambda"},
       ]'
       CLOUDEVENTS_PROTOCOL: kafka
-      CLOUDEVENTS_URLS: river:9092
+      CLOUDEVENTS_URLS: rapids:9092,rapids:9092,rapids:9092
       NODE_ENV: development
 
   river-to-lambda-hydrator:
@@ -24,7 +24,7 @@ services:
         {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "service-able-helloworld"},
       ]'
       CLOUDEVENTS_PROTOCOL: kafka
-      CLOUDEVENTS_URLS: river:9092
+      CLOUDEVENTS_URLS: river-alpha:9092,river-alpha:9092,river-alpha:9092
       NODE_ENV: development
 
 networks:
