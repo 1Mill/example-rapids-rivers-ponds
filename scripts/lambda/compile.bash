@@ -17,6 +17,7 @@ do
 	HANDLER=
 	RUNTIME=
 	TYPE=
+	ENVIRONMENT=
 
 	# * Import configuration vars for lambda function
 	source $dir/$CONFIG_FILENAME
@@ -44,4 +45,13 @@ do
 			--handler $HANDLER \
 			--role just-has-to-exist \
 			--runtime $RUNTIME
+
+	# * If environmental varaibles are present, add them to the lambda configuration
+	if [ -n "$ENVIRONMENT" ]
+	then
+		aws --endpoint-url $AWS_ENDPOINT \
+			lambda update-function-configuration \
+				--environment "Variables=$ENVIRONMENT" \
+				--function-name $FUNCTIONNAME
+	fi
 done
