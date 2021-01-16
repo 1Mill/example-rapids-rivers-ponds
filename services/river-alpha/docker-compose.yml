@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  river-alpha:
+    image: confluentinc/cp-kafka:6.0.1
+    depends_on:
+      - river-alpha-zookeeper
+    environment:
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://:29092,EXTERNAL://:9092
+      KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+      KAFKA_DELETE_TOPIC_ENABLE: 'true'
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_LISTENERS: INTERNAL://:29092,EXTERNAL://:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_ZOOKEEPER_CONNECT: river-alpha-zookeeper:2181
+
+  river-alpha-zookeeper:
+    image: confluentinc/cp-zookeeper:6.0.1
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_REQUEST_TIMEOUT: 2000
+      ZOOKEEPER_TICK_TIME: 2000
+
+networks:
+  default:
+    external:
+      name: services-network
