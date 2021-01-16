@@ -4,9 +4,9 @@ const rapids = createEventStream({
 	id: process.env.CLOUDEVENT_ID,
 	mechanism: process.env.CLOUDEVENT_MECHANISM,
 	password: process.env.CLOUDEVENT_PASSWORD,
+	protocol: process.env.CLOUDEVENT_PROTOCOL,
 	urls: process.env.CLOUDEVENT_URLS,
 	username: process.env.CLOUDEVENT_USERNAME,
-
 })
 const perform = async ({ cloudevent }) => {
 	const { message } = JSON.parse(cloudevent.data || JSON.stringify({ message: 'Hello world!' }))
