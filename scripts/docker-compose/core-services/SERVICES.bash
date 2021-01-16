@@ -2,4 +2,5 @@
 
 SERVICES=(
 	"/services/aws"
+	"/services/rapids"
 )
