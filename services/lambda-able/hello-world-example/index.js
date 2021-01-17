@@ -9,7 +9,7 @@ const rapids = createEventStream({
 	username: process.env.CLOUDEVENT_USERNAME,
 })
 const perform = async ({ cloudevent }) => {
-	const { message } = JSON.parse(cloudevent.data || JSON.stringify({ message: 'Hello world!' }))
+	const { message } = JSON.parse(cloudevent.data)
 
 	const enrichment = message.split('').reverse().join('')
 
@@ -18,9 +18,9 @@ const perform = async ({ cloudevent }) => {
 			...cloudevent,
 			data: JSON.stringify(enrichment),
 			datacontenttype: 'application/json',
-			id: 'todo',
+			id: new Date().toDateString(),
 			source: process.env.CLOUDEVENT_ID,
-			type: 'todo.0.e',
+			type: 'hello-world-example.0.e',
 		})
 	})
 }
