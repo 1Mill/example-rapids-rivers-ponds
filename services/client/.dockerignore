@@ -1,0 +1,13 @@
+*
+
+!assets
+!jsconfig.json
+!layouts
+!middleware
+!nuxt.config.js
+!package-lock.json
+!package.json
+!pages
+!plugins
+!static
+!store
