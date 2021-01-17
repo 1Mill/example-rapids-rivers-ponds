@@ -9,20 +9,7 @@ const river = createEventStream({
 	username: process.env.CLOUDEVENT_USERNAME,
 })
 const perform = async ({ cloudevent }) => {
-	const { message } = JSON.parse(cloudevent.data || JSON.stringify({ message: 'Hello world!' }))
-
-	const enrichment = message.split('').reverse().join('')
-
-	await river.emit({
-		cloudevent: createCloudevent({
-			...cloudevent,
-			data: JSON.stringify(enrichment),
-			datacontenttype: 'application/json',
-			id: 'todo',
-			source: process.env.CLOUDEVENT_ID,
-			type: 'todo.0.e',
-		})
-	})
+	await river.emit({ cloudevent })
 }
 
 const lambda = createEventStream({ protocol: 'lambda' })
