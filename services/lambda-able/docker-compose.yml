@@ -5,20 +5,24 @@ services:
     image: ghcr.io/click-flow/docker-images/lambda-hydrator:v2-alpine
     environment:
       AWS_ACCESS_KEY_ID: my-aws-id
+      AWS_ENDPOINT: aws:4566
       AWS_REGION: us-east-1
       AWS_SECRET_ACCESS_KEY: my-aws-key
       MAPS_JSON: '[
+        {"cloudeventType": "hello-world-example.0.e", "lambdaArn": "services-lambdaable-rapidstoriverhydratorlambda"},
         {"cloudeventType": "hello-world-example.0.o", "lambdaArn": "services-lambdaable-rapidstoriverhydratorlambda"}
       ]'
       CLOUDEVENTS_ID: services-lambdaable-rapidstoriverhydrator
       CLOUDEVENTS_PROTOCOL: kafka
       CLOUDEVENTS_URLS: rapids:9092,rapids:9092,rapids:9092
       NODE_ENV: development
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
 
   river-to-lambda-hydrator:
     image: ghcr.io/click-flow/docker-images/lambda-hydrator:v2-alpine
     environment:
       AWS_ACCESS_KEY_ID: my-aws-id
+      AWS_ENDPOINT: aws:4566
       AWS_REGION: us-east-1
       AWS_SECRET_ACCESS_KEY: my-aws-key
       MAPS_JSON: '[
@@ -28,6 +32,7 @@ services:
       CLOUDEVENTS_PROTOCOL: kafka
       CLOUDEVENTS_URLS: river-alpha:9092,river-alpha:9092,river-alpha:9092
       NODE_ENV: development
+      NODE_TLS_REJECT_UNAUTHORIZED: 0
 
 networks:
   default:
