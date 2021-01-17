@@ -5,8 +5,9 @@ CONFIG_FILENAME=local.config
 DIRECTORIES=$(
 	find ${1-.} \
 	-name "$CONFIG_FILENAME" \
+	-not -path "*.nuxt*" \
+	-not -path "*dist*" \
 	-not -path "*node_modules*" \
-	-not -path "*nuxt*" \
 	-printf "%h\n"
 )
 
