@@ -13,7 +13,7 @@ const perform = async ({ cloudevent }) => {
 
 	const enrichment = message.split('').reverse().join('')
 
-	rapids.emit({
+	await rapids.emit({
 		cloudevent: createCloudevent({
 			...cloudevent,
 			data: JSON.stringify(enrichment),
