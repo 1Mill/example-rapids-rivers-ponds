@@ -15,4 +15,4 @@ ENV \
 
 COPY . .
 
-RUN ["npm", "run", "start"]
+CMD ["sh", "-c", "npm run build; npm run start"]
