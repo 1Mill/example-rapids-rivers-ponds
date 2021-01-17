@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  rapids-rest-proxy:
+    build: .
+    environment:
+      CLOUDEVENT_ID: services-rapidsrestproxy
+      CLOUDEVENT_PROTOCOL: kakfa
+      CLOUDEVENT_URLS: rapids:9092
+      NODE_ENV: development
+    ports:
+      - 5000:5000
+    volumes:
+      - ./:/app
+
+networks:
+  default:
+    external:
+      name: services-network
